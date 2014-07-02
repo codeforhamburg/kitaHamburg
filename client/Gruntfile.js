@@ -189,8 +189,6 @@ module.exports = function (grunt) {
                         '<%= config.dist %>/images/{,*/}*.*',
                         '<%= config.dist %>/styles/fonts/{,*/}*.*',
                         '<%= config.dist %>/*.{ico,png}',
-                        '<%= config.dist %>/**/*.json',
-                        '<%= config.dist %>/**/*.geojson'
                     ]
                 }
             }

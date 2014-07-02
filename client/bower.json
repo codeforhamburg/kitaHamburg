@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "jquery": "~1.11.0",
-    "leaflet": "~0.7.3",
     "bootstrap-sass-official": "~3.2.0"
   },
   "devDependencies": {}
