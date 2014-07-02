@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>kitafinder</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/vendor.css -->
+		<link rel="stylesheet" href="../bower_components/leaflet/dist/leaflet.css"
+        <!-- bower:css -->
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+		<div id='map'></div>
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/leaflet/dist/leaflet.js"></script>
+        <script src="../bower_components/leaflet/dist/leaflet-src.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+        <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+		
+		<!-- build:js({app,.tmp}) scripts/utility.js -->
+        <script src="scripts/utility.js"></script>
+        <!-- endbuild -->
+		
+		<script>
+			var map = L.map('map').setView([53.56, 10.02], 11);
+			var mapbox = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				'minzoom': 10,
+				'maxzoom': 18,
+				'attribution': '© OpenStreetMap contributors'
+			}).addTo(map);
+			
+			$.getJSON('kitas.geojson', function(data) {
+				L.geoJson(data, {
+					onEachFeature: function (feature, layer) {
+						layer.bindPopup(generatePopup(feature.properties));
+					},
+					pointToLayer: generateMarker,
+					filter: function(feature, latlng){
+						return true;
+					}
+				}).addTo(map);
+			});
+		</script>
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
