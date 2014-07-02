@@ -11,6 +11,8 @@ module.exports = function (grunt) {
 
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('grunt-jsonlint');
+    grunt.loadNpmTasks('grunt-json-minify');
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
@@ -39,6 +41,10 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true
                 }
+            },
+            json:{
+                files: ['<%= config.app %>/{,*/}*.{json, geojson}'],
+                tasks: ['jsonlint']
             },
             jstest: {
                 files: ['test/spec/{,*/}*.js'],
@@ -133,6 +139,12 @@ module.exports = function (grunt) {
                 'test/spec/{,*/}*.js'
             ]
         },
+        
+        jsonlint: {
+          all: {
+            src: [ '<%= config.app %>/**/*.json', '<%= config.app %>/**/*.geojson' ]
+          }
+        },
 
         // Mocha testing framework configuration options
         mocha: {
@@ -176,7 +188,9 @@ module.exports = function (grunt) {
                         '<%= config.dist %>/styles/{,*/}*.css',
                         '<%= config.dist %>/images/{,*/}*.*',
                         '<%= config.dist %>/styles/fonts/{,*/}*.*',
-                        '<%= config.dist %>/*.{ico,png}'
+                        '<%= config.dist %>/*.{ico,png}',
+                        '<%= config.dist %>/**/*.json',
+                        '<%= config.dist %>/**/*.geojson'
                     ]
                 }
             }
@@ -211,6 +225,12 @@ module.exports = function (grunt) {
                     dest: '<%= config.dist %>/images'
                 }]
             }
+        },
+        
+        'json-minify': {
+          dist: {
+            files: '<%= config.dist %>/**/*.geojson'
+          }
         },
 
         svgmin: {
@@ -284,7 +304,9 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'
+                        'styles/fonts/{,*/}*.*',
+                        '{,*/}*.json',
+                        '{,*/}*.geojson'
                     ]
                 }]
             },
@@ -308,7 +330,8 @@ module.exports = function (grunt) {
             dist: [
                 'copy:styles',
                 'imagemin',
-                'svgmin'
+                'svgmin',
+                'json-minify'
             ]
         }
     });
@@ -357,12 +380,14 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'copy:dist',
+        'json-minify',
         'rev',
         'usemin',
         'htmlmin'
     ]);
 
     grunt.registerTask('default', [
+        'jsonlint',
         'newer:jshint',
         'test',
         'build'

@@ -1,5 +1,11 @@
 {
   "name": "kitafinder",
+  "description": "Der Hamburger Kitafinder",
+  "authors": [
+    "@webtobesocial",
+    "@tike10"
+  ],
+  "license": "BSD",
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
@@ -24,9 +30,13 @@
     "grunt-concurrent": "~0.5.0",
     "load-grunt-tasks": "~0.4.0",
     "time-grunt": "~0.3.1",
-    "jshint-stylish": "~0.1.5"
+    "jshint-stylish": "~0.1.5",
+    "grunt-jsonlint": "^1.0.4",
+    "jsonlint-lines": "^1.6.0",
+    "grunt-json-minify": "^0.4.0"
   },
   "engines": {
     "node": ">=0.10.0"
-  }
+  },
+  "private": true
 }
