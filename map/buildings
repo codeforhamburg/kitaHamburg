@@ -1,0 +1,5 @@
+#buildings {
+  line-color: darken(@building, 50);
+  polygon-fill: @building;
+  line-width: 1;
+}

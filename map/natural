@@ -1,0 +1,14 @@
+#natural {
+  [type = 'water'],
+  [type = 'riverbank'] { 
+    polygon-fill: @water;
+  }
+  
+  [type = 'forest'] {
+    polygon-fill: @forest;
+  }
+  
+  [type = 'park'] {
+    polygon-fill: @park;
+  }
+}

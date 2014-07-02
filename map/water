@@ -1,0 +1,211 @@
+#waterways {
+  [type = 'mud']::natural,
+  [type = 'lake']::natural,
+  [type = 'water']::natural,
+  [type = 'basin']::landuse,
+  [type = 'reservoir']::landuse,
+  [type = 'riverbank']::waterway,
+  [type = 'water']::water {
+    [zoom >= 11] {
+      polygon-fill: @water;
+      polygon-gamma: 0.75;
+    }
+  }
+  
+  [type = 'ditch'],
+  [type = 'drain'],
+  [type = 'stream'] {
+    [zoom >= 13] {
+      line-color: @water;
+      line-width: 1.5;
+      
+      [type='stream'][zoom >= 15] {
+        line-width: 2.5;
+      }
+    }
+  }
+  
+  [type = 'drain'],
+  [type = 'ditch'] {
+    [zoom >= 15] {
+      line-color: @water;
+      line-width: 1;
+    }
+  }
+  
+  /* Flüsschen */
+  [type = 'stream'][zoom >= 15] {
+    line-color: @water;
+    line-width: 2;
+  }
+  
+  /* Fischwehr */
+  [type = 'weir'][zoom >= 15] {
+    line-color: @water;
+    line-join: round;
+    line-cap: round;
+    line-width: 2;
+  }
+
+  /* Trockenkanal */
+  [type = 'wadi'][zoom >= 13] {
+    line-color: @water;
+    line-join: round;
+    line-cap: round;
+    line-width: 1;
+    line-dasharray: 4,4;
+    
+    [zoom >= 16] { line-width: 2; }
+  }
+  
+  /* Sumpfgebiet, Moor */
+  [type = 'marsh'],
+  [type = 'wetland'] {
+    [zoom >= 13] {
+      polygon-fill: @water;
+    }
+  }
+  
+  [type = 'river'][zoom >= 11] {
+    line-color: @water;
+    line-width: 1.7;
+  }
+
+  [type = 'river'][zoom >= 12] {
+    line-join: round; 
+    line-cap: round;
+    line-width: 2;
+    
+    [zoom >= 13] {
+      line-width: 3;
+    }
+    [zoom >= 14] {
+      line-width: 5;
+    }
+    [zoom >= 15] {
+      line-width: 6;
+    }
+    [zoom >= 17] {
+      line-width: 10;
+    }
+    [zoom >= 18] {
+      line-width: 12;
+    }
+  }
+
+  [type = 'canal'][zoom >= 12][zoom < 14] {
+    line-color: @water;
+    line-join: round;
+    line-cap: round;
+    line-width: 3;
+    
+    [zoom >= 13] {
+      line-width: 4;
+    }
+  }
+  
+  [type = 'canal'][zoom >= 14] {
+    line-width: 7;
+    line-color: @water;
+    line-join: round;
+    line-cap: round;
+    
+    [zoom >= 17] { line-width: 11; }
+  }
+
+  [type = 'derelict_canal'][zoom >= 12] {
+    line-color: @water;
+    line-join: round;
+    line-cap: round;
+    line-width: 1.5;
+    line-dasharray: 4,4;
+    line-opacity: 0.5;
+    
+    [zoom >= 13] {
+      line-width: 2.5;
+      line-dasharray: 4,6;
+    }
+    [zoom >= 14] {
+      line-width: 4.5;
+      line-dasharray: 4,8;
+    }
+  }
+}
+
+#waterways::label {
+  [type = 'river'][zoom >= 13] {
+    text-name: "[name]";
+    text-fill: @waterText;
+    text-face-name: @fonts;
+    text-placement: line;
+    text-halo-radius: 1;
+    text-spacing: 400;
+    text-size: 10;
+    
+    [zoom >= 14] { text-size: 12; }
+  }
+
+  [type = 'canal'][zoom >= 13][zoom < 14] {
+    text-name: "[name]";
+    text-fill: @waterText;
+    text-face-name: @fonts;
+    text-placement: line;
+    text-halo-radius: 1;
+    text-size: 10;
+  }
+
+  [type = 'stream'][zoom >= 15] {
+    text-name: "[name]";
+    text-fill: @waterText;
+    text-face-name: @fonts;
+    text-placement: line;
+    text-halo-radius: 1;
+    text-spacing: 600;
+    text-size: 10;
+    text-dy: 8;
+  }
+
+  [type = 'drain'],
+  [type = 'ditch'] {
+    [zoom >= 15] {
+      text-name: "[name]";
+      text-fill: @waterText;
+      text-face-name: @fonts;
+      text-placement: line;
+      text-halo-radius: 1;
+      text-spacing: 600;
+      text-size: 10;
+    }
+  }
+
+  [type = 'canal'][zoom >= 14] {
+    text-name: "[name]";
+    text-fill: @waterText;
+    text-face-name: @fonts;
+    text-placement: line;
+    text-halo-radius: 1;
+    text-size: 10;
+  }
+  
+  [type = 'lock'][zoom >= 17] {
+    text-name: "[name]";
+    text-fill: @waterText;
+    text-face-name: @fonts;
+    text-placement: point;
+    text-wrap-width: 20;
+  }
+
+  [type = 'derelict_canal'][zoom >= 13] {
+    text-name: "[name]";
+    text-fill: @waterText;
+    text-face-name: @fonts;
+    text-placement: line;
+    text-halo-radius: 1;
+    text-spacing: 600;
+    text-size: 10;
+    
+    [zoom >= 14] {
+      text-size: 12;
+    }
+  }
+}

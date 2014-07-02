@@ -1,0 +1,236 @@
+{
+  "bounds": [
+    9.6134,
+    53.3786,
+    10.3502,
+    53.7412
+  ],
+  "center": [
+    9.8423,
+    53.5386,
+    16
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "roads",
+    "template_teaser": "{{{osm_id}}} {{{name}}} {{{ref}}} type: {{{type}}} oneway: {{{oneway}}} bridge: {{{bridge}}} tunnel: {{{tunnel}}} maxspeed: {{{maxspeed}}}\n",
+    "fields": [
+      "osm_id",
+      "name",
+      "type",
+      "ref",
+      "oneway",
+      "bridge",
+      "tunnel",
+      "maxspeed"
+    ],
+    "template_full": "{{{osm_id}}} {{{name}}} {{{type}}}"
+  },
+  "minzoom": 16,
+  "maxzoom": 16,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "settings",
+    "roads",
+    "aeroways",
+    "railways",
+    "natural",
+    "water",
+    "landuse",
+    "buildings"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "extent": [
+        9.5728483,
+        53.3769545,
+        10.3479235,
+        53.7450268
+      ],
+      "id": "landuse",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\hamburg-latest.shp\\landuse.shp",
+        "id": "landuse",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "landuse"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        9.5932288,
+        53.3748201,
+        10.4951249,
+        53.7527871
+      ],
+      "id": "natural",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\hamburg-latest.shp\\natural.shp",
+        "id": "natural",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "natural"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        9.3731867,
+        53.3799028,
+        10.3466457,
+        53.8064561
+      ],
+      "id": "waterways",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\hamburg-latest.shp\\waterways.shp",
+        "id": "waterways",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "waterways"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        9.7008517,
+        53.4035779,
+        10.3083063,
+        53.7718068
+      ],
+      "id": "railways",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\hamburg-latest.shp\\railways.shp",
+        "id": "railways",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "railways"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        9.8153858,
+        53.5301602,
+        10.0066614,
+        53.6351194
+      ],
+      "id": "aerowaypolygons",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\aeroways\\aeroways_polygons.shp",
+        "id": "aerowaypolygons",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "aerowaypolygons"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        9.813432,
+        53.5249393,
+        10.0058623,
+        53.6548454
+      ],
+      "id": "aerowaylines",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\aeroways\\aeroways_lines.shp",
+        "id": "aerowaylines",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "aerowaylines"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        9.9023535,
+        53.5523396,
+        10.0366184,
+        53.6243289
+      ],
+      "id": "aerowaypoints",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\aeroways\\aeroways_points.shp",
+        "id": "aerowaypoints",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "aerowaypoints"
+    },
+    {
+      "geometry": "linestring",
+      "extent": [
+        9.5733167,
+        53.3805135,
+        10.3544211,
+        53.7492344
+      ],
+      "id": "roads",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\hamburg-latest.shp\\roads.shp",
+        "id": "roads",
+        "project": "kindergardenMap",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "roads"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        9.6484614,
+        53.3857021,
+        10.3307183,
+        53.742443
+      ],
+      "id": "buildings",
+      "class": "",
+      "Datasource": {
+        "file": "C:\\Users\\Mr. Wendelken\\Downloads\\hamburg-latest.shp\\buildings.shp"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "buildings"
+    }
+  ],
+  "scale": 1,
+  "metatile": 1,
+  "name": "",
+  "description": "",
+  "attribution": "",
+  "legend": ""
+}

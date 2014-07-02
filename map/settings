@@ -1,0 +1,90 @@
+@fonts: "Ubuntu Regular","Arial Regular","DejaVu Sans Book";
+
+@white: #fff;
+@darkGrey: #444;
+
+@building: #555;
+@construction: #d2d2bb;
+@cemetery: #aacbaf; //grave_yard
+@commercial: #fbfbf0;
+@desert: #ecdeb7;
+@farmyard: #eccb9d;
+@forest: #a0cf85;
+@footway: #ccc;
+@grass: #cfeca8; //meadow, common, garden, village_green, conservation
+@ground: #fafafa;
+@hospital: #c66c65;
+@land: #fff9ea;
+@military: #a1b29a;
+@motorway: #ff7732;
+@natural: #c6e4b4; //grassland
+@park: #c2f7b0; //recreation_ground
+@parking: #f7efb7;
+@placeOfWorship: #f9e3e1; //Andachtsstätte
+@primary: #ffcc80;
+@railway: #fdfdfd; //Eisenbahn
+@residential: #f7f7e6;
+@road: #aaa;
+@school: #f0f0d8; //university, college, kindergarden
+@stadium: #cdc673; //sports_centre
+@themepark: #734a08;
+@water: #c0d8ff;
+@waterText: #168;
+@wood: #aed1a0;
+
+@apron: @road;
+@aerodrome: @building;
+@aeroways: @road;
+@allotments: @forest;
+@attraction: @themepark;
+@barracks: @military;
+@basin: @water;
+@bridleway: @road;
+@buildingSite: @construction; //Baugelände
+@campsite: @grass; //caravan_site, picnic_site
+@cycleway: @footway;
+@dangerArea: @military;
+@farm: @farmyard; //farmland
+@field: @grass;
+@garden: @grass; //Garten
+@garages: @parking;
+@golfCourse: @grass;
+@greenfield: @grass;
+@greenhouse: @field; //Treibhaus
+@harbour: @water; //Hafen
+@heath: @grass;
+@helipad: @road;
+@industrial: @commercial; //also railway
+@livingStreet: @road;
+@motorwayLink: @motorway;
+@observatory: @park; //Sternwarte
+@orchard: @grass; //Obstplantage
+@parish: @placeOfWorship; //Gemeinde
+@pedestrian: @road;
+@playground: @park;
+@pitch: @stadium;
+@plantNursery: @farmyard; //Gärtnerei
+@power: @parking;
+@primaryLink: @primary;
+@provingGround: @parking; //Verkehrsübungsplatz
+@quarry: @land; //Steinbruch
+@recreationGround: @park;
+@reservoir: @water;
+@restArea: @parking; //services
+@retail: @commercial;
+@runway: @road;
+@sand: @desert;
+@secondary: @primary;
+@secondaryLink: @primary;
+@service: @road;
+@steps: @road;
+@taxiway: @road;
+@tertiary: @road;
+@tertiaryLink: @road;
+@track: @wood;
+@trackWay: @road;
+@trunk: @motorway;
+@trunkLink: @motorway;
+@unclassified: @road;
+@villageGreen: @grass; //Dorfwiese
+@vineyard: @grass;

@@ -1,0 +1,1295 @@
+#roads::line {
+  /* Treppen */
+  [type = 'steps'] {
+    line-color: @steps;
+    line-dasharray: 2, 2;
+    line-cap: butt;
+   
+    [zoom >= 14] {
+      line-width: 0.5;
+    }
+  
+    [zoom = 16] {
+      line-width: 1;
+    }
+  
+    [zoom >= 17] {
+      line-width: 1.5;
+    }
+  }
+ 
+  /* Fußgängerweg */
+  [type = 'footway'] {
+    line-color: darken(@footway, 10);
+    line-cap: butt;
+   
+    [zoom >= 14] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Fußgängerzone */
+  [type = 'pedestrian'] {
+    line-color: darken(@pedestrian, 10);
+    line-cap: butt;
+
+    [zoom >= 14] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Fahrradweg */
+  [type = 'cycleway'] {
+    line-color: @cycleway;
+    line-dasharray: 4,1;
+    line-cap: butt;
+
+    [zoom = 16] {
+      line-width: 1.2;
+    }
+
+    [zoom = 17] {
+      line-width: 1.6;
+    }
+
+    [zoom > 17] {
+      line-width: 2;
+    }
+  }
+
+  /* Reitweg */
+  [type = 'bridleway'] {
+    line-color: darken(@bridleway, 10);
+    line-cap: butt;
+
+    [zoom >= 14] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Waldweg */
+  [type = 'track'] {
+    line-color: darken(@trackWay, 10);
+
+    [zoom >= 14] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Zugangsweg */
+  [type = 'service'] {
+    line-color: @service;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 14] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Verkehrsberuhigter Bereich */
+  [type = 'living_street'] {
+    line-color: @livingStreet;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Anwohnerstraße */
+  [type = 'residential'] {
+    line-color: @residential;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Nebenstraße */
+  [type = 'unclassified'] {
+    line-color: @unclassified;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Anschluss an Landstraße */
+  [type = 'secondary_link'] {
+    line-color: @secondaryLink;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Landstraße */
+  [type = 'secondary'] {
+    line-color: @secondary;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 1.5;
+    }
+  }
+
+  /* Anschluss an Kreisstraße */
+  [type = 'tertiary_link'] {
+    line-color: @tertiaryLink;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Kreisstraße */
+  [type = 'tertiary'] {
+    line-color: @tertiary;
+   
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Anschluss an Bundesstraße */
+  [type = 'primary_link'] {
+    line-color: @primaryLink;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Bundesstraße */
+  [type = 'primary'] {
+    line-color: @primary;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 1.5;
+    }
+  }
+
+  /* Anschluss an Autobahnähnliche Straße */
+  [type = 'trunk_link'] {
+    line-color: @trunkLink;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Autobahnähnliche Straße */
+  [type = 'trunk'] {
+    line-color: @trunk;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 2;
+    }
+  }
+
+  /* Autobahn Anschluss */
+  [type = 'motorway_link'] {
+    line-color: @motorwayLink;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 0.2;
+    }
+
+    [zoom >= 12] {
+      line-width: 0.5;
+    }
+  }
+
+  /* Autobahn */
+  [type = 'motorway'] {
+    line-color: @motorway;
+    line-join: round;
+    line-cap: round;
+
+    [zoom >= 11] {
+      line-width: 2;
+    }
+  }
+}
+
+#roads::case {
+  [zoom >= 11] {
+    line-color: @road;
+    line-join: round;
+    line-cap: round;
+    line-width: 0;
+
+    [tunnel = 1] {
+      line-dasharray: 6, 3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@road, 80);
+    }
+  }
+
+  /* Fußgängerzone */
+  [type = 'pedestrian'] {
+    line-color: @pedestrian;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@pedestrian, 10);
+    }
+
+    [zoom = 16] {
+      line-width: 1.6;
+
+      [zoom = 17] {
+        line-width: 2;
+      }
+
+      [zoom > 17] {
+        line-width: 2.5;
+      }
+    }
+  }
+
+  /* Zugangsweg */
+  [type = 'service'] {
+    line-color: @service;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6, 3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@service, 10);
+    }
+
+    [zoom = 16] {
+      line-width: 1.6;
+
+      [zoom = 17] {
+        line-width: 2;
+      }
+
+      [zoom > 17] {
+        line-width: 2.5;
+      }
+    }
+  }
+
+  /* Verkehrsberuhigter Bereich */
+  [type = 'living_street'] {
+    line-color: @livingStreet;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@livingStreet, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Anwohnerstraße */
+  [type = 'residential'] {
+    line-color: @road;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@road, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Nebenstraße */
+  [type = 'unclassified'] {
+    line-color: @unclassified;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@unclassified, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+     line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Anschluss an Kreisstraße */
+  [type = 'tertiary_link'] {
+    line-color: @tertiaryLink;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6, 3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@tertiaryLink, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Kreisstraße */
+  [type = 'tertiary'] {
+    line-color: @tertiary;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@tertiary, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Anschluss an Landstraße */
+  [type = 'secondary_link'] {
+    line-color: @secondaryLink;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@secondaryLink, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Landstraße */
+  [type = 'secondary'] {
+    line-color: @secondary;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@secondary, 10);
+    }
+
+    [zoom = 12] {
+      line-width: 3;
+    }
+
+    [zoom = 13] {
+      line-width: 3.2;
+    }
+
+    [zoom = 14] {
+      line-width: 4;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 10;
+    }
+
+    [zoom = 17] {
+      line-width: 12;
+    }
+
+    [zoom > 17] {
+      line-width: 14;
+    }
+  }
+
+  /* Anschluss an Bundesstraße */
+  [type = 'primary_link'] {
+    line-color: @primaryLink;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@primaryLink, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Bundesstraße */
+  [type = 'primary'] {
+    line-color: @primary;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@primary, 10);
+    }
+
+    [zoom = 12] {
+      line-width: 3;
+    }
+
+    [zoom = 13] {
+      line-width: 3.2;
+    }
+
+    [zoom = 14] {
+      line-width: 4;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 10;
+    }
+
+    [zoom = 17] {
+      line-width: 12;
+    }
+
+    [zoom > 17] {
+      line-width: 14;
+    }
+  }
+
+  /* Anschluss an Autobahnähnliche Straße */
+  [type = 'trunk_link'] {
+    line-color: @trunkLink;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@trunkLink, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Autobahnähnliche Straße */
+  [type = 'trunk'] {
+    line-color: @trunk;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@trunk, 10);
+    }
+
+    [zoom = 12] {
+      line-width: 3.2;
+    }
+
+    [zoom = 13] {
+      line-width: 4;
+    }
+
+    [zoom = 14] {
+      line-width: 6;
+    }
+
+    [zoom = 15] {
+      line-width: 8;
+    }
+
+    [zoom = 16] {
+      line-width: 12;
+    }
+
+    [zoom = 17] {
+      line-width: 16;
+    }
+
+    [zoom > 17] {
+      line-width: 18;
+    }
+  }
+
+  /* Autobahn Anschluss */
+  [type = 'motorway_link'] {
+    line-color: @motorwayLink;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6,3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@motorwayLink, 10);
+    }
+
+    [zoom = 14] {
+      line-width: 3.2;
+    }
+
+    [zoom = 15] {
+      line-width: 6;
+    }
+
+    [zoom = 16] {
+      line-width: 8;
+    }
+
+    [zoom = 17] {
+      line-width: 11;
+    }
+
+    [zoom > 17] {
+      line-width: 13;
+    }
+  }
+
+  /* Autobahn */
+  [type = 'motorway'] {
+    line-color: @motorway;
+    line-join: round;
+    line-cap: round;
+
+    [tunnel = 1] {
+      line-dasharray: 6, 3;
+      line-cap: butt;
+    }
+
+    [bridge = 1] {
+      line-color: darken(@motorway, 10);
+    }
+
+    [zoom = 12] {
+      line-width: 3.2;
+    }
+
+    [zoom = 13] {
+      line-width: 4;
+    }
+
+    [zoom = 14] {
+      line-width: 6;
+    }
+
+    [zoom = 15] {
+      line-width: 8;
+    }
+
+    [zoom = 16] {
+      line-width: 12;
+    }
+
+    [zoom = 17] {
+      line-width: 16;
+    }
+
+    [zoom > 17] {
+      line-width: 18;
+    }
+  }
+} 
+
+#roads::fill {
+  [zoom >= 11] {
+    line-color: lighten(@road, 20);
+    line-join: round;
+    line-cap: round;
+    line-width: 0;
+  }
+  
+  [type = 'living_street'] {
+    line-color: lighten(@livingStreet, 20);
+    
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'residential'] {
+    line-color: lighten(@road, 20);
+
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+  
+  [type = 'pedestrian'] {
+    line-color: lighten(@pedestrian, 20);
+
+    [zoom = 16] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 17] {
+      line-width: 2;
+    }
+    
+    [zoom > 17] {
+      line-width: 3;
+    }
+  }
+  
+  [type = 'service'] {
+    line-color: lighten(@service, 20);
+    
+    [zoom = 16] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 17] {
+      line-width: 2;
+    }
+    
+    [zoom > 17] {
+      line-width: 3;
+    }
+  }
+  
+  [type = 'unclassified'] {
+    line-color: lighten(@unclassified, 20);
+    
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'tertiary_link'] {
+    line-color: lighten(@tertiaryLink, 20);
+  	line-join: round;
+    line-cap: round;
+    line-clip: true;
+    
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'tertiary'] {
+    line-color: lighten(@tertiary, 20);
+
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'secondary_link'] {
+    line-color: lighten(@secondaryLink, 10);
+  	line-join: round;
+    line-cap: round;
+    line-clip: true;
+   
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'secondary'] {
+    line-color: lighten(@secondary, 10);
+
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'primary_link'] {
+    line-color: lighten(@primaryLink, 10);
+  	line-join: round;
+    line-cap: round;
+    line-clip: true;
+ 
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'primary'] {
+    line-color: lighten(@primary, 10);
+  
+    [zoom = 12] {
+      line-width: 1;
+    }
+    
+    [zoom = 13] {
+      line-width: 1.2;
+    }
+    
+    [zoom = 14] {
+      line-width: 2;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 7;
+    }
+    
+    [zoom = 17] {
+      line-width: 9;
+    }
+    
+    [zoom > 17] {
+      line-width: 11;
+    }
+  }
+  
+  [type = 'trunk_link'] {
+    line-color: lighten(@trunkLink, 10);
+  	line-join: round;
+    line-cap: round;
+    line-clip: true;
+
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+
+  [type = 'trunk'] {
+    line-color: lighten(@trunk, 10);
+   
+    [zoom = 12] {
+      line-width: 1.2;
+    }
+    
+    [zoom = 13] {
+      line-width: 2;
+    }
+    
+    [zoom = 14] {
+      line-width: 4;
+    }
+    
+    [zoom = 15] {
+      line-width: 6;
+    }
+    
+    [zoom = 16] {
+      line-width: 9;
+    }
+    
+    [zoom = 17] {
+      line-width: 13;
+    }
+    
+    [zoom > 17] {
+      line-width: 15;
+    }
+  }
+
+  [type = 'motorway_link'] {
+    line-color: lighten(@motorwayLink, 10);
+  	line-join: round;
+    line-cap: round;
+    line-clip: true;
+   
+    [zoom = 14] {
+      line-width: 1.6;
+    }
+    
+    [zoom = 15] {
+      line-width: 4;
+    }
+    
+    [zoom = 16] {
+      line-width: 6;
+    }
+    
+    [zoom = 17] {
+      line-width: 8;
+    }
+    
+    [zoom > 17] {
+      line-width: 10;
+    }
+  }
+  
+  [type = 'motorway'] {
+    line-color: lighten(@motorway, 10);
+
+    [zoom = 12] {
+      line-width: 1.2;
+    }
+    
+    [zoom = 13] {
+      line-width: 2;
+    }
+    
+    [zoom = 14] {
+      line-width: 4;
+    }
+    
+    [zoom = 15] {
+      line-width: 6;
+    }
+    
+    [zoom = 16] {
+      line-width: 9;
+    }
+    
+    [zoom = 17] {
+      line-width: 13;
+    }
+    
+    [zoom > 17] {
+      line-width: 15;
+    }
+  }
+}
+
+#roads::label {
+  text-name: "''";
+  text-face-name: @fonts;
+  text-min-distance: 20;
+  text-placement: line;
+  text-halo-radius: 1;
+
+  [type='motorway'][zoom>=12] {
+    text-fill: spin(darken(@motorway, 45), -15);
+    text-halo-fill: lighten(@motorway, 40);
+    text-min-distance: 200;
+    text-name: "[name]";
+
+    [zoom >= 13] { text-size: 11; }
+    [zoom >= 15] { text-size: 12; }
+    [zoom = 17] { text-size: 13; }
+    [zoom >= 18] { text-size: 14; }
+  }
+
+  [type = 'trunk'][zoom >= 12] {
+    text-name:"[name]";
+    text-fill:spin(darken(@trunk,45),-15);
+    text-halo-fill:lighten(@trunk,40);
+    text-min-distance: 200;
+
+    [zoom >= 15] { text-size: 11; }
+    [zoom = 17] { text-size: 12; }
+    [zoom >= 18] { text-size: 14; }
+  }
+
+  [type = 'primary'][zoom >= 13],
+  [type = 'secondary'][zoom >= 13] {
+    text-fill: spin(darken(@primary, 50), -15);
+    text-halo-fill: lighten(@primary, 15);
+    text-name: "[name]";
+
+    [zoom >= 15] { text-size:11; }
+    [zoom = 17] { text-size:12; }
+    [zoom >= 18] { text-size:14; }
+  }
+
+  [type = 'residential'][zoom >= 15],
+  [type = 'road'][zoom >= 15],
+  [type = 'tertiary'][zoom >= 15],
+  [type = 'unclassified'][zoom >=15] {
+    text-halo-fill: @white;
+    text-fill: @darkGrey;
+    text-name: "[name]";
+    text-size: 11;
+
+    [zoom = 17] { text-size: 12; }
+    [zoom >= 18] { text-size: 13; }
+  }
+}
+
+#roads::oneway[zoom > 15][oneway = 1] {
+  marker-fill: spin(darken(@motorway, 40), -10);
+  marker-file: url("shape://arrow");
+  marker-line-opacity: 0.5;
+  marker-line-color: @white;
+  marker-placement: line;
+  marker-line-width: 1;
+  marker-spacing: 300;
+  marker-opacity: 0.8;
+  marker-width: 15;
+}
