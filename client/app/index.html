@@ -45,6 +45,10 @@
         <script src="scripts/utility.js"></script>
         <!-- endbuild -->
 		
+		<!-- build:js({app,.tmp}) scripts/main.js -->
+		<script src="scripts/main.js"></script>
+		<!-- endbuild -->
+
 		<script>
 			var map = L.map('map').setView([53.56, 10.02], 11);
 			var mapbox = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -53,21 +57,8 @@
 				'attribution': '© OpenStreetMap contributors'
 			}).addTo(map);
 			
-			$.getJSON('kitas.geojson', function(data) {
-				L.geoJson(data, {
-					onEachFeature: function (feature, layer) {
-						layer.bindPopup(generatePopup(feature.properties));
-					},
-					pointToLayer: generateMarker,
-					filter: function(feature, latlng){
-						return true;
-					}
-				}).addTo(map);
-			});
+			var kitasFilter = new GEOJSON_FEATURE_FILTER('kitas.geojson');
+			L.geoJSON(kitasFilter.Filter(Filter, {'eingliederungshilfe': {Min: 3, Max: 5}})).addTo(map);
 		</script>
-
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
 </body>
 </html>
