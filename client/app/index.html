@@ -58,7 +58,12 @@
 			}).addTo(map);
 			
 			var kitasFilter = new GEOJSON_FEATURE_FILTER('kitas.geojson');
-			L.geoJSON(kitasFilter.Filter(Filter, {'eingliederungshilfe': {Min: 3, Max: 5}})).addTo(map);
+			L.geoJson(kitasFilter.Filter(Filter, {
+				'krippe': {
+					Min: 4,
+					Max: 5
+				}
+			})).addTo(map);
 		</script>
 </body>
 </html>

@@ -37,11 +37,17 @@ function GEOJSON_FEATURE_FILTER(url){
 
     // private function that wraps an array of features into a copy of the original headers
     function wrapInHeaders(selectedItems){
-        var geoJSONobj = {};
+        var geoJSONobj = {features: []},
+            i = 0,
+            length = selectedItems.length;
+
         for (var k in headers){
             geoJSONobj[k] = headers[k];
         }
-        geoJSONobj.features = selectedItems;
+
+        for (i=0; i<length; i += 1){
+            geoJSONobj.features.push(selectedItems[i]);
+        }
         return geoJSONobj;
     }
 
@@ -62,11 +68,14 @@ function GEOJSON_FEATURE_FILTER(url){
 
 
 // checks wether an geoJSON feature matches the selected options
+// options should be an object with service names as keys and timing
+// information as in kitas.geojson as value or if it is an non timebased
+// service the value should be true
 function Filter(feature, options){
     // go through all options, and comare them
     for (var option in options){
         // first we must discriminate timed and non-timed values
-        if (typeof(options.option) === typeof(true)){
+        if (typeof(options[option]) === typeof(true)){
             if (feature.properties.services[option] !== undefined){
                 return true;
             }
