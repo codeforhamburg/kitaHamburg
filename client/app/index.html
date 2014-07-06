@@ -60,7 +60,7 @@
 			$.getJSON('kitas.geojson', function(data){
 				L.geoJson(data, {
 					onEachFeature: function(feature, layer){
-						feature.bindPopup(generatePopup(feature.properties));
+						layer.bindPopup(generatePopup(feature.properties));
 					},
 					pointToLayer: generateMarker,
 					filter: FilterFactory({'krippe': {'Min': 4, 'Max': 5}}),
