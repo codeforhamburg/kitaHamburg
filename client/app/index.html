@@ -57,13 +57,15 @@
 				'attribution': '© OpenStreetMap contributors'
 			}).addTo(map);
 			
-			var kitasFilter = new GEOJSON_FEATURE_FILTER('kitas.geojson');
-			L.geoJson(kitasFilter.Filter(Filter, {
-				'krippe': {
-					Min: 4,
-					Max: 5
-				}
-			})).addTo(map);
+			$.getJSON('kitas.geojson', function(data){
+				L.geoJson(data, {
+					onEachFeature: function(feature, layer){
+						feature.bindPopup(generatePopup(feature.properties));
+					},
+					pointToLayer: generateMarker,
+					filter: FilterFactory({'krippe': {'Min': 4, 'Max': 5}}),
+				}).addTo(map);
+			});
 		</script>
 </body>
 </html>
