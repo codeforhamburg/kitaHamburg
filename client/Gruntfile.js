@@ -141,9 +141,9 @@ module.exports = function (grunt) {
         },
         
         jsonlint: {
-          all: {
-            src: [ '<%= config.app %>/**/*.json', '<%= config.app %>/**/*.geojson' ]
-          }
+            all: {
+                src: [ '<%= config.app %>/**/*.json', '<%= config.app %>/**/*.geojson' ]
+            }
         },
 
         // Mocha testing framework configuration options
@@ -226,9 +226,9 @@ module.exports = function (grunt) {
         },
         
         'json-minify': {
-          dist: {
-            files: '<%= config.dist %>/**/*.geojson'
-          }
+            dist: {
+                files: '<%= config.dist %>/**/*.geojson'
+            }
         },
 
         svgmin: {
