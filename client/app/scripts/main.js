@@ -125,16 +125,28 @@ $(function() {
 	$('#krippe').slider({})
 		.on('slideStop', function() {
 			var values = $(this).slider('getAttribute', 'value');
-			var min = Math.min(values);
-			var max = Math.max(values);
+
+            // Math.min and Max.max yielded NaN ?!
+            var min = 0;
+            var max = 0;
+            if (values[0] <= values[1]){
+                min = values[0];
+                max = values[1];
+            } else {
+                min = values[1];
+                max = values[2];
+            }
 
 			var filterData =  {
-				'Krippe': {
-			        'Max': max, 
-			        'Min': min
-			    }
-			};
-			debugger;
+                // krippe is written a small k in kitas.geojson
+                // I admit, it makes no sense, but we need to be consistent
+                // in order for the comparsion to work.
+                'krippe': {
+                    'Max': max,
+                    'Min': min
+                }
+            };
+
 			var filteredGeoJson = kitas.Filter(Filter, filterData);
 
 			console.log(filteredGeoJson);
@@ -146,9 +158,9 @@ $(function() {
 			});
 
 			//map.clearLayers();
-			markers.clearLayers();
-			markers.addLayer(geoJsonLayer);
-	    	map.addLayer(markers);
+            markers.clearLayers();
+            markers.addLayer(geoJsonLayer);
+            map.addLayer(markers);
 
 		});
 });
