@@ -7,9 +7,15 @@
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="/favicon.ico">
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <link rel="stylesheet" href="../bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" />
+
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="../bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
@@ -20,11 +26,20 @@
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-		<div id='map'></div>
+        <div class="fluid-container">
+            <div class="row">
+                 <div id="filters" class="col-md-2">
+                    <input id="krippe" data-slider-id='krippeSlider' type="text" data-slider-min="3" data-slider-max="12" data-slider-step="1" data-slider-value="[5,8]"/>
+                 </div>
+
+                <div id='map' class="col-md-10"></div>
+            </div>
+       </div>
 		
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="../bower_components/modernizr/modernizr.js"></script>
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
         <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
@@ -38,34 +53,17 @@
         <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
         <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
         <script src="../bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+        <script src="../bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
+        <script src="../bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 		
 		<!-- build:js({app,.tmp}) scripts/utility.js -->
         <script src="scripts/utility.js"></script>
         <!-- endbuild -->
-		
-		<!-- build:js({app,.tmp}) scripts/main.js -->
-		<script src="scripts/main.js"></script>
-		<!-- endbuild -->
 
-		<script>
-			var map = L.map('map').setView([53.56, 10.02], 11);
-			var mapbox = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-				'minzoom': 10,
-				'maxzoom': 18,
-				'attribution': '© OpenStreetMap contributors'
-			}).addTo(map);
-			
-			$.getJSON('kitas.geojson', function(data){
-				L.geoJson(data, {
-					onEachFeature: function(feature, layer){
-						layer.bindPopup(generatePopup(feature.properties));
-					},
-					pointToLayer: generateMarker,
-					filter: FilterFactory({'krippe': {'Min': 4, 'Max': 5}}),
-				}).addTo(map);
-			});
-		</script>
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
 </body>
 </html>

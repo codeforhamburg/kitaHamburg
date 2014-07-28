@@ -25,7 +25,6 @@ function generatePopup(kita){
     return tmpl;
 }
 
-
 // generates and styles a marker to be used to represent a feature
 // see: http://leafletjs.com/reference.html#marker
 // and: http://leafletjs.com/reference.html#icon

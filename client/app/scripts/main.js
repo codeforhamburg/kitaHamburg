@@ -1,3 +1,4 @@
+/* global L, generatePopup*/
 'use strict';
 
 // a crockford constructor for a GEOJSON FeatureCollection that can
@@ -91,7 +92,64 @@ function Filter(feature, options){
 }
 
 
+$(function() {
+	var map = L.map('map').setView([53.56, 10.02], 11);
+	var mapbox = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+		'minzoom': 10,
+		'maxzoom': 18,
+		'attribution': '© OpenStreetMap contributors'
+	}).addTo(map);
 
+	var markers = new L.MarkerClusterGroup({
+	    spiderfyOnMaxZoom: true,
+	    showCoverageOnHover: true,
+	    zoomToBoundsOnClick: true
+	});
 
+	var jsonData;
 
+	$.getJSON('kitas.geojson', function(data) {
+	    jsonData = data;
+		var geoJsonLayer = L.geoJson(data, {
+			onEachFeature: function (feature, layer) {
+				layer.bindPopup(generatePopup(feature.properties));
+			}
+		});
+
+	    markers.addLayer(geoJsonLayer);
+	    map.addLayer(markers);
+	});
+
+	var kitas = new GEOJSON_FEATURE_FILTER('kitas.geojson');
+
+	$('#krippe').slider({})
+		.on('slideStop', function() {
+			var values = $(this).slider('getAttribute', 'value');
+			var min = Math.min(values);
+			var max = Math.max(values);
+
+			var filterData =  {
+				'Krippe': {
+			        'Max': max, 
+			        'Min': min
+			    }
+			};
+			debugger;
+			var filteredGeoJson = kitas.Filter(Filter, filterData);
+
+			console.log(filteredGeoJson);
+
+			var geoJsonLayer = L.geoJson(filteredGeoJson, {
+				onEachFeature: function (feature, layer) {
+					layer.bindPopup(generatePopup(feature.properties));
+				}
+			});
+
+			//map.clearLayers();
+			markers.clearLayers();
+			markers.addLayer(geoJsonLayer);
+	    	map.addLayer(markers);
+
+		});
+});
 
