@@ -122,7 +122,7 @@ $(function() {
 
 	var kitas = new GEOJSON_FEATURE_FILTER('kitas.geojson');
 
-	$('#krippe').slider({})
+	$('.slider').slider({})
 		.on('slideStop', function() {
 			var values = $(this).slider('getAttribute', 'value');
 
