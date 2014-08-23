@@ -122,7 +122,7 @@ $(function() {
 
 	var kitas = new GEOJSON_FEATURE_FILTER('kitas.geojson');
 
-	$('.slider').slider({})
+	$('.slider').each().slider({})
 		.on('slideStop', function() {
 			var values = $(this).slider('getAttribute', 'value');
 
