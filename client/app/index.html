@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="/favicon.ico">
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
         <link rel="stylesheet" href="../bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="../bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" />
@@ -28,18 +28,84 @@
         <![endif]-->
         <div class="fluid-container">
             <div class="row">
-            <div id="filters" class="col-md-2">
-            <input class="slider" id="krippe" data-slider-id='krippeSlider' type="text" data-slider-min="1" data-slider-max="12" data-slider-step="1" data-slider-value="[5,8]"/>
-            <input class="slider" id="elementar" data-slider-id='elementarSlider' type="text" data-slider-min="1" data-slider-max="12" data-slider-step="1" data-slider-value="[5,8]"/>
-            <input class="slider" id="vorschulklasse" data-slider-id='vorschulklasseSlider' type="text" data-slider-min="1" data-slider-max="12" data-slider-step="1" data-slider-value="[5,8]"/>
-            <input class="slider" id="hort" data-slider-id='hortSlider' type="text" data-slider-min="1" data-slider-max="12" data-slider-step="1" data-slider-value="[5,8]"/>
-            <input class="slider" id="anschlussbetrGT" data-slider-id='anschlussbetrGTSlider' type="text" data-slider-min="1" data-slider-max="12" data-slider-step="1" data-slider-value="[5,8]"/>
-            </div>
+                <div id="map" class="col-md-9"></div>
+                <div id="filters" class="col-md-3">
+					<div class="filter" id="krippe">
+						<input type="checkbox" class="filterSelect" id="krippe"></input>
+						<label for="krippe">Krippe</label></br>
+						<input type="text" name="krippe" class="slider" id="krippe"
+							data-slider-id='krippeSlider'
+							data-slider-min="1"
+							data-slider-max="12"
+							data-slider-step="1"
+							data-slider-value="[5,8]"/>
+					</div>
 
-            <div id='map' class="col-md-10"></div>
+					<div class="filter">
+						<input type="checkbox" class="filterSelect" id="elementar"></input>
+						<label for="elementar">Elementar</label></br>
+						<input type="text" name="elementar" class="slider" id="elementar"
+							data-slider-id='elementarSlider'
+							data-slider-min="1"
+							data-slider-max="12"
+							data-slider-step="1"
+							data-slider-value="[5,8]"/>
+					</div>
+					
+					<div class="filter" id="krippe">
+						<input type="checkbox" class="filterSelect" id="eingliederungshilfe"></input>
+						<label for="eingliederungshilfe">Eingliederungshilfe</label></br>
+						<input type="text" name="eingliederungshilfe" class="slider" id="eingliederungshilfe"
+							data-slider-id='eingliederungshilfeSlider'
+							data-slider-min="1"
+							data-slider-max="12"
+							data-slider-step="1"
+							data-slider-value="[5,8]"/>
+					</div>
+
+					<div class="filter">
+						<input type="checkbox" class="filterSelect" id="hort"></input>
+						<label for="hort">Hort</label></br>
+						<input type="text" name="hort" class="slider" id="hort"
+							data-slider-id='hortSlider'
+							data-slider-min="1"
+							data-slider-max="12"
+							data-slider-step="1"
+							data-slider-value="[2,7]"/>
+					</div>
+
+					<div class="filter">
+						<input type="checkbox" class="filterSelect" id="anschlBertrGTS"></input>
+						<label for="anschlBertrGTS">Anschlussbetreuung Ganztagsschule</label></br>
+						<input type="text" name="anschlBertrGTS" class="slider" id="anschlBertrGTS"
+							data-slider-id='anschlussbetrGTSlider'
+							data-slider-min="1"
+							data-slider-max="12"
+							data-slider-step="1"
+							data-slider-value="[3,3]"/>
+					</div>
+					
+					<div class="filter">
+						<input type="checkbox" class="filterSelect" id="vorschulklasse">
+							<label>Vorschulklasse</label>
+						</input>
+					</div>
+					
+					<div class="filter">
+						<input type="checkbox" class="filterSelect" id="anschlBertrGTSonder">
+							<label>Anschlussbetreuung Ganztagsschule Sonderbedarfe</label>
+						</input>
+					</div>
+					
+					<div class="filter">
+						<input type="checkbox" class="filterSelect" id="paedMittagsTisch">
+							<label>Pädagogischer Mittagstisch</label>
+						</input>
+					</div>
+                </div>
             </div>
-       </div>
-		
+		</div>
+        
 		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.js'></script>
         <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-label/v0.2.1/leaflet.label.css' rel='stylesheet' />
@@ -63,53 +129,9 @@
         <script src="../bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
-		<!-- build:js({app,.tmp}) scripts/utility.js -->
+        <!-- build:js({app,.tmp}) scripts/utility.js -->
         <script src="scripts/utility.js"></script>
         <!-- endbuild -->
-		
-		<script>
-
-            // init Leaflet
-			var map = L.map('map').setView([53.56, 10.02], 11);
-			var mapbox = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-				'minzoom': 10,
-				'maxzoom': 18,
-				'attribution': '© OpenStreetMap contributors'
-			}).addTo(map);
-			
-            // Overlay: Kitas
-			$.getJSON('kitas.geojson', function(data) {
-				L.geoJson(data, {
-					onEachFeature: function (feature, layer) {
-						layer.bindPopup(generatePopup(feature.properties));
-					},
-					pointToLayer: generateMarker,
-					filter: function(feature, latlng){
-						return true;
-					}
-				}).addTo(map);
-            });
-
-            // Overlay: Stadtteile Hamburg
-            var stadtteile = $.getJSON('stadtteile_hh.geojson', function(data) {
-                L.geoJson(data, {
-                    style: function(feature) {
-                        return {
-                            color: '#000000',
-                            fillOpacity: 0,
-                            opacity: 0.5,
-                            weight: 1
-                        }
-                    },
-                    onEachFeature: function(feature, layer) {
-                        layer.bindLabel(feature.properties.name);
-                    } 
-                }).addTo(map);
-            });
-
-
-		</script>
-
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <!-- endbuild -->

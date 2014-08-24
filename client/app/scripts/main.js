@@ -1,4 +1,4 @@
-/* global L, generatePopup*/
+/* global L, generatePopup, minMax */
 'use strict';
 
 // a crockford constructor for a GEOJSON FeatureCollection that can
@@ -8,7 +8,7 @@ function GEOJSON_FEATURE_FILTER(url){
     // private member variables holding all headers and all features
     var headers = {};
     var features = [];
-    var that = this;
+    //var that = this;
 
     // private function that splits geoJSON headers and features-array up
     // and stores them in the private variables headers and features respecitvely.
@@ -61,6 +61,7 @@ function GEOJSON_FEATURE_FILTER(url){
     this.Filter = function(filterfunc, options){
         var selected = filter(filterfunc, options);
         if (selected.length === 0){
+            console.debug('No Result found.');
             return null;
         }
         return wrapInHeaders(selected);
@@ -91,77 +92,94 @@ function Filter(feature, options){
     return false;
 }
 
+// global kita filtering object
+var kitas = new GEOJSON_FEATURE_FILTER('kitas.geojson');
 
-$(function() {
-	var map = L.map('map').setView([53.56, 10.02], 11);
-	var mapbox = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		'minzoom': 10,
-		'maxzoom': 18,
-		'attribution': '© OpenStreetMap contributors'
-	}).addTo(map);
-
-	var markers = new L.MarkerClusterGroup({
-	    spiderfyOnMaxZoom: true,
-	    showCoverageOnHover: true,
-	    zoomToBoundsOnClick: true
-	});
-
-	var jsonData;
-
-	$.getJSON('kitas.geojson', function(data) {
-	    jsonData = data;
-		var geoJsonLayer = L.geoJson(data, {
-			onEachFeature: function (feature, layer) {
-				layer.bindPopup(generatePopup(feature.properties));
-			}
-		});
-
-	    markers.addLayer(geoJsonLayer);
-	    map.addLayer(markers);
-	});
-
-	var kitas = new GEOJSON_FEATURE_FILTER('kitas.geojson');
-
-	$('.slider').each().slider({})
-		.on('slideStop', function() {
-			var values = $(this).slider('getAttribute', 'value');
-
-            // Math.min and Max.max yielded NaN ?!
-            var min = 0;
-            var max = 0;
-            if (values[0] <= values[1]){
-                min = values[0];
-                max = values[1];
-            } else {
-                min = values[1];
-                max = values[2];
+$(document).ready(function() {
+    // init Leaflet
+    var map = L.map('map').setView([53.56, 10.02], 11);
+    
+    // basic tileLayer
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        'minzoom': 10,
+        'maxzoom': 18,
+        'attribution': '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Overlay: Stadtteile Hamburg
+    $.getJSON('stadtteile_hh.geojson', function(data) {
+        L.geoJson(data, {
+            style: function() {
+                return {
+                    color: '#000000',
+                    fillOpacity: 0,
+                    opacity: 0.5,
+                    weight: 1
+                };
+            },
+            onEachFeature: function(feature, layer) {
+                layer.bindLabel(feature.properties.name);
             }
-
-			var filterData =  {
-                // krippe is written a small k in kitas.geojson
-                // I admit, it makes no sense, but we need to be consistent
-                // in order for the comparsion to work.
-                'krippe': {
-                    'Max': max,
-                    'Min': min
-                }
+        }).addTo(map);
+    });
+    
+    function getSliderStates(){
+        var currentOptions = {};
+        $('input.slider').each(function(){
+            var key = $(this).attr('id');
+            //console.debug('Key:', key);
+            
+            if ($('input.filterSelect#' + key).prop('checked') !== true){
+                return;
+            }
+            
+            var currentValue = $(this).slider('getAttribute', 'value');
+            currentValue.sort(minMax);
+            //console.debug('Value:', currentValue);
+            
+            currentOptions[key] = {
+                Min: currentValue[0],
+                Max: currentValue[1],
             };
-
-			var filteredGeoJson = kitas.Filter(Filter, filterData);
-
-			console.log(filteredGeoJson);
-
-			var geoJsonLayer = L.geoJson(filteredGeoJson, {
-				onEachFeature: function (feature, layer) {
-					layer.bindPopup(generatePopup(feature.properties));
-				}
-			});
-
-			//map.clearLayers();
-            markers.clearLayers();
-            markers.addLayer(geoJsonLayer);
-            map.addLayer(markers);
-
-		});
+        });
+        return currentOptions;
+    }
+    
+    var currentGEOJSONLayer;
+    function updateMap(){
+        if (currentGEOJSONLayer !== undefined){
+            map.removeLayer(currentGEOJSONLayer);
+        }
+          
+        var serviceOptions = getSliderStates();
+        var filteredGeoJson = kitas.Filter(Filter, serviceOptions);
+        if ( filteredGeoJson === null){
+            console.error('nothig found', serviceOptions);
+            return;
+        }
+        console.log('Found:', filteredGeoJson.features.length, filteredGeoJson);
+        
+        currentGEOJSONLayer = L.geoJson(filteredGeoJson, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(generatePopup(feature.properties));
+            }
+        }).addTo(map);
+    }
+    
+    
+    $('input.slider')
+        .each(function(){
+            $(this).slider().on('slideStop', function(){
+                var checkboxSelector = 'input.filterSelect#' + $(this).attr('id');
+                if (! $(checkboxSelector).prop('checked')){
+                  $(checkboxSelector).prop('checked', true);
+                }
+                updateMap();
+            });
+        });
+    
+    $('input.filterSelect').click(function(){
+        updateMap();
+    });
 });
 
