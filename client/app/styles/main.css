@@ -44,10 +44,11 @@ html,body,.fluid-container
 }
 
 .slider {
-    max-width: 100%;
+    max-width: 90%;
 }
 
-#filter {
-    padding: 15px;
-    padding-top: 50px;
+.filter {
+    border: 1px solid black;
+    margin: 1% 0;
+    padding: 1%;
 }
