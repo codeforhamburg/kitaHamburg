@@ -1,12 +1,13 @@
-2,krippe,true, 0-3
-1,elementar,true, 3-6
+id,name,timed,age
+2,krippe,true,0-3
+1,elementar,true,3-6
 
-8,vorschulklasse,true, 5
-6,hort,true, 6-14
+3,eingliederungshilfe,true,???
+4,anschlussbetreuung ganztagsschule,true,???
+6,hort,true,6-14
 
-3,eingliederungshilfe,true, 
-4,anschlussbetreuung ganztagsschule,true
 
-5,pädagogischer mittagstisch,false
-7,anschlussbetreuung ganztagsschule sonderbedarfe,false
+5,pädagogischer mittagstisch,false,???
+7,anschlussbetreuung ganztagsschule sonderbedarfe,false,???
+8,vorschulklasse,false,5
 
