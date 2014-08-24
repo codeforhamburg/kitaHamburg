@@ -1,0 +1,46 @@
+[{
+	"id": "elementar",
+	"label": "Elementar",
+	"age": [0, 3],
+	"timed": true,
+	"time": [1, 12]
+},{
+	"id": "krippe",
+	"label": "Krippe",
+	"age": [3, 6],
+	"timed": true,
+	"time": [1, 12]
+},{
+	"id": "eingliederungshilfe",
+	"label": "Eingliederungshilfe",
+	"age": [3, 6],
+	"timed": true,
+	"time": [1, 12]
+},{
+	"id": "vorschulklasse",
+	"label": "Vorschulklasse",
+	"age": [5, 5],
+	"timed": false
+},{
+	"id": "anschlBertrGTS",
+	"label": "Anschlussbetreuung Ganztagsschule",
+	"age": [6, 14],
+	"timed": true,
+	"time": [1, 12]
+},{
+	"id": "hort",
+	"label": "Hort",
+	"age": [6, 14],
+	"timed": true,
+	"time": [1, 12]
+},{
+	"id": "anschlBertrGTSonder",
+	"label": "Anschlussbetreuung Ganztagsschule Sonderbedarfe",
+	"age": [6, 14],
+	"timed": false
+},{
+	"id": "paedMittagsTisch",
+	"label": "Pädagogischer Mittagstisch",
+	"age": [6, 14],
+	"timed": false
+}]
