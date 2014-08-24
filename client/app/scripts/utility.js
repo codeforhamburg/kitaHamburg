@@ -1,3 +1,4 @@
+/* global L */
 'use strict';
 
 // generates the html to shown as the popup of each marker
@@ -58,4 +59,9 @@ function FilterFactory(options){
         }
         return false;
     };
+}
+
+// Array sort helper function
+function minMax(a, b){
+    return a < b ? -1 : 1;
 }
