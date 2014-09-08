@@ -47,8 +47,14 @@ html,body,.fluid-container
     max-width: 90%;
 }
 
+#filters{
+	position: absolute;
+	z-index: +1;
+}
+
 .filter {
     border: 1px solid black;
+	background: white;
     margin: 1% 0;
     padding: 1%;
 }
