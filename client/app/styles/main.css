@@ -47,6 +47,15 @@ html,body,.fluid-container
     max-width: 90%;
 }
 
+.nav-tabs > li > a{
+	background: #F3F3F3;
+}
+
+.nav-tabs > li > a:hover{
+	background: #F9F9F9;
+}
+
+
 #filters{
 	position: absolute;
 	z-index: +1;
