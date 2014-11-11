@@ -13,6 +13,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-json-minify');
+    grunt.loadNpmTasks('grunt-connect-proxy');
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
@@ -78,15 +79,41 @@ module.exports = function (grunt) {
                 // Change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
+            proxies: [{
+                context: '/cgi-bin', // the context of the data service
+                host: 'localhost', // wherever the data service is running
+                port: 8888, // the port that the data service is running on
+                
+            }],
             livereload: {
                 options: {
-                    middleware: function(connect) {
-                        return [
+                    middleware: function(connect, options) {
+                        
+                        var middlewares = [];
+                        
+                        if (!Array.isArray(options.base)) {
+                            options.base = [options.base];
+                        }
+                        
+                        // Setup the proxy
+                        middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+                        
+                        // Serve static files.
+                        options.base.forEach(function(base) {
+                            middlewares.push(connect.static(base));
+                        });
+
+                        // Make directory browse-able.
+                        //var directory = options.directory || options.base[options.base.length - 1];
+                        //middlewares.push(connect.directory(directory));
+                        
+                        middlewares.push(
                             connect.static('.tmp'),
                             connect().use('/bower_components', connect.static('./bower_components')),
                             connect.static(config.app)
-                        ];
-                    }
+                        );
+                        return middlewares;
+                    },
                 }
             },
             test: {
@@ -344,6 +371,7 @@ module.exports = function (grunt) {
             'clean:server',
             'concurrent:server',
             'autoprefixer',
+            'configureProxies:server', // added just before connect
             'connect:livereload',
             'watch'
         ]);

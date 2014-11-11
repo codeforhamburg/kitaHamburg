@@ -39,29 +39,3 @@ function generateMarker(feature, latlng){
         riseOffset: 250
     });
 }
-
-function FilterFactory(options){
-    return function (feature, layer){
-        // go through all options, and comare them
-        for (var option in options){
-            // first we must discriminate timed and non-timed values
-            if (typeof(options[option]) === typeof(true)){
-                if (feature.properties.services[option] !== undefined){
-                    return true;
-                }
-            } else {
-                if (feature.properties.services[option] !== undefined){
-                    if (feature.properties.services[option].Max >= options[option].Max &&  feature.properties.services[option].Min <= options[option].Min){
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    };
-}
-
-// Array sort helper function
-function minMax(a, b){
-    return a < b ? -1 : 1;
-}
