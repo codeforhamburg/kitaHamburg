@@ -83,6 +83,9 @@ module.exports = function (grunt) {
                 context: '/cgi-bin', // the context of the data service
                 host: 'localhost', // wherever the data service is running
                 port: 8888, // the port that the data service is running on
+                rewrite: {
+                    '^/cgi-bin/kitas': '',
+                }
                 
             }],
             livereload: {

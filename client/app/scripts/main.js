@@ -3,16 +3,13 @@
 
 
 function searchKitas(){
-  $.ajax({
-    url: 'localhost:8888/cgi-bin/kitas',
-    dataType: "json",
-    data: {"krippe": {"Min": 4, "Max": 5}}
-    })
-    .done(function(data){
-      console.log("done:", data);
-    })
-    .fail(function(data){
-      console.log("fail:", data);
+    $.ajax({
+      type: 'POST',
+      url: '/cgi-bin/kitas/',
+      data: JSON.stringify({'hort': {'Min': 4, 'Max': 5}}),
+      success: function(data) { console.info('response:', data); },
+      contentType: 'application/json',
+      dataType: 'json'
     });
 }
 
@@ -79,14 +76,14 @@ $(document).ready(function() {
                 layer.bindLabel(feature.properties.name);
             }*/
         }).addTo(map);
-    });  
+    });
     
     $('input.slider')
         .each(function(){
             $(this).slider().on('slideStop', function(){
                 var checkboxSelector = 'input.filterSelect#' + $(this).attr('id');
                 if (! $(checkboxSelector).prop('checked')){
-                  $(checkboxSelector).prop('checked', true);
+                    $(checkboxSelector).prop('checked', true);
                 }
                 searchKitas();
             });
