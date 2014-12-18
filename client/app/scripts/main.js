@@ -1,15 +1,19 @@
 /* global L, generatePopup, minMax */
 'use strict';
 
+var app = {
+    map: null,
+    currentGEOJSONLayer: undefined,
+};
 
 function searchKitas(){
     $.ajax({
-      type: 'POST',
-      url: '/cgi-bin/kitas/',
-      data: JSON.stringify({'hort': {'Min': 4, 'Max': 5}}),
-      success: function(data) { console.info('response:', data); },
-      contentType: 'application/json',
-      dataType: 'json'
+        type: 'POST',
+        url: '/cgi-bin/kitas/',
+        data: JSON.stringify({'hort': {'Min': 4, 'Max': 5}}),
+        success: updateMap,
+        contentType: 'application/json',
+        dataType: 'json'
     });
 }
 
@@ -35,31 +39,35 @@ function getSliderStates(){
     return currentOptions;
 }
 
-var currentGEOJSONLayer;
+
 function updateMap(data){
-    if (currentGEOJSONLayer !== undefined){
-        map.removeLayer(currentGEOJSONLayer);
+    var kitas = data || [];
+    if (app.currentGEOJSONLayer !== undefined){
+        app.map.removeLayer(app.currentGEOJSONLayer);
     }
     
-    console.log('Found:', data.length, data[0]);
+    console.log('Found:', kitas.length, kitas[0]);
     
-    currentGEOJSONLayer = L.geoJson(filteredGeoJson, {
+    var GeoJSON = {type: "FeatureCollection", features: kitas};
+    
+    app.currentGEOJSONLayer = L.geoJson(GeoJSON, {
         onEachFeature: function (feature, layer) {
             layer.bindPopup(generatePopup(feature.properties));
         }
-    }).addTo(map);
+    }).addTo(app.map);
 }
+
 
 $(document).ready(function() {
     // init Leaflet
-    var map = L.map('map').setView([53.56, 10.02], 11);
+    app.map = L.map('map').setView([53.56, 10.02], 11);
     
     // basic tileLayer
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         'minzoom': 10,
         'maxzoom': 18,
         'attribution': '© OpenStreetMap contributors'
-    }).addTo(map);
+    }).addTo(app.map);
     
     // Overlay: Stadtteile Hamburg
     $.getJSON('stadtteile_hh.geojson', function(data) {
@@ -75,7 +83,7 @@ $(document).ready(function() {
            /* onEachFeature: function(feature, layer) {
                 layer.bindLabel(feature.properties.name);
             }*/
-        }).addTo(map);
+        }).addTo(app.map);
     });
     
     $('input.slider')
