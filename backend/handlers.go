@@ -31,29 +31,31 @@ func NewDBHandler(DBCon string, DBName string, CollName string) (*DBHandler, err
 }
 
 func (h *DBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	log.Println(r)
+	log.Println("Request", r)
 	dec := json.NewDecoder(r.Body)
 	defer r.Body.Close()
 
 	var data services
 	err := dec.Decode(&data)
 	log.Println(data)
-	ExitErr(err, 500)
+	RespErr(w, err, 500)
+	ExitErr("decoding request body", err, 500)
 
 	var found []interface{}
 	q := buildQuery(data)
 	log.Println("q:", q)
 	err = h.Kitas.Find(q).All(&found)
-	ExitErr(err, 500)
+	RespErr(w, err, 500)
+	ExitErr("querying db", err, 500)
 
 	log.Println("found:", len(found))
 	if len(found) > 0 {
 		log.Println("one:", found[0])
 	}
-
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	enc := json.NewEncoder(w)
 	err = enc.Encode(found)
-	ExitErr(err, 500)
+	ExitErr("Marshaling body", err, 500)
 }
 
 func buildQuery(data services) bson.M {

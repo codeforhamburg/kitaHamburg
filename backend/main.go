@@ -21,15 +21,17 @@ func init() {
 	log.SetOutput(file)
 }
 
-func ExitErr(err error, status int) {
+func RespErr(rw http.ResponseWriter, err error, status int) {
 	if err != nil {
-		resp := &http.Response{
-			StatusCode: status,
-			ProtoMajor: 1,
-			ProtoMinor: 0,
-		}
-		log.Println("err:", err, resp)
-		resp.Write(os.Stdout)
+		rw.WriteHeader(status)
+		rw.Write([]byte("You talk funny :-)"))
+	}
+}
+
+func ExitErr(msg string, err error, status int) {
+	if err != nil {
+		log.Println(msg, err, "ret:", status)
+		os.Exit(status)
 	}
 }
 
@@ -39,7 +41,7 @@ func main() {
 
 	log.Println("DB:", DBHost, DBName, DBCol)
 	handler, err := NewDBHandler(DBHost, DBName, DBCol)
-	ExitErr(err, 500)
+	ExitErr("couldn't get DBHandler", err, 500)
 	log.Println("DB connected:", handler.DB, handler.Kitas)
 
 	mux.Handle("/", handler)
@@ -49,6 +51,8 @@ func main() {
 		log.Fatal(http.ListenAndServe(HTTPHost, mux))
 	} else {
 		log.Println("Serving fcgi")
-		log.Fatal(cgi.Serve(mux))
+		if err := cgi.Serve(mux); err != nil {
+			log.Fatal("cgi.Serve:", err)
+		}
 	}
 }
