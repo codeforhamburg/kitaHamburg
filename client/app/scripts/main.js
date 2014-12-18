@@ -1,21 +1,10 @@
-/* global L, generatePopup, minMax */
+/* global L, generatePopup */
 'use strict';
 
 var app = {
     map: null,
     currentGEOJSONLayer: undefined,
 };
-
-function searchKitas(){
-    $.ajax({
-        type: 'POST',
-        url: '/cgi-bin/kitas/',
-        data: JSON.stringify({'hort': {'Min': 4, 'Max': 5}}),
-        success: updateMap,
-        contentType: 'application/json',
-        dataType: 'json'
-    });
-}
 
 function getSliderStates(){
     var currentOptions = {};
@@ -27,13 +16,11 @@ function getSliderStates(){
             return;
         }
         
-        var currentValue = $(this).slider('getAttribute', 'value');
-        currentValue.sort(minMax);
-        //console.debug('Value:', currentValue);
+        var currentValues = $(this).slider('getAttribute', 'value');
         
         currentOptions[key] = {
-            Min: currentValue[0],
-            Max: currentValue[1],
+            Min: Math.min(currentValues[0], currentValues[1]),
+            Max: Math.max(currentValues[0], currentValues[1]),
         };
     });
     return currentOptions;
@@ -48,13 +35,26 @@ function updateMap(data){
     
     console.log('Found:', kitas.length, kitas[0]);
     
-    var GeoJSON = {type: "FeatureCollection", features: kitas};
+    var GeoJSON = {type: 'FeatureCollection', features: kitas};
     
     app.currentGEOJSONLayer = L.geoJson(GeoJSON, {
         onEachFeature: function (feature, layer) {
             layer.bindPopup(generatePopup(feature.properties));
         }
     }).addTo(app.map);
+}
+
+function searchKitas(){
+    var query = getSliderStates();
+    $.ajax({
+        type: 'POST',
+        url: '/cgi-bin/kitas/',
+        data: JSON.stringify(query),
+        contentType: 'application/json',
+        dataType: 'json',
+        success: updateMap,
+        error: function (err){ console.log('error', err);},
+    });
 }
 
 
@@ -100,7 +100,5 @@ $(document).ready(function() {
     $('input.filterSelect').click(function(){
         searchKitas();
     });
-    
-    searchKitas();
 });
 
