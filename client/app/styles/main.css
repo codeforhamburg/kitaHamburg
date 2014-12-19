@@ -45,6 +45,8 @@ html,body,.fluid-container
 
 .slider {
     max-width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .nav-tabs > li > a{
@@ -53,6 +55,11 @@ html,body,.fluid-container
 
 .nav-tabs > li > a:hover{
 	background: #F9F9F9;
+}
+
+h2 {
+	text-align: center;
+	font-size: 1.15em;
 }
 
 

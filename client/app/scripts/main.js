@@ -50,19 +50,23 @@ app.getSliderStates = function (){
     var currentOptions = {};
     $('input.slider').each(function(){
         var key = $(this).attr('id');
-        //console.debug('Key:', key);
+        console.debug('Key:', key);
         
-        if ($('input.filterSelect#' + key).prop('checked') !== true){
+        var filter = $('div.filter#' + key);
+        if ( ! filter.hasClass('active')){
             return;
         }
+        console.debug("filter:", filter);
         
         var currentValues = $(this).slider('getAttribute', 'value');
+        console.debug("sliderValues:", currentValues);
         
         currentOptions[key] = {
             Min: Math.min(currentValues[0], currentValues[1]),
             Max: Math.max(currentValues[0], currentValues[1]),
         };
     });
+    console.debug("currentOptions:", currentOptions);
     return currentOptions;
 }
 
@@ -126,25 +130,27 @@ $(document).ready(function() {
         }).addTo(app.map);
     });
     
-    $('input.slider')
-        .each(function(){
-            $(this).slider().on('slideStop', function(){
-                var checkboxSelector = 'input.filterSelect#' + $(this).attr('id');
-                if (! $(checkboxSelector).prop('checked')){
-                    $(checkboxSelector).prop('checked', true);
-                }
-                app.searchKitas();
-            });
-        });
-    
-    $('input.filterSelect').click(function(){
-        app.searchKitas();
+    $('input.slider').each(function(){
+        $(this).slider({tooltip_split: true});
     });
+    
+    $('input.slider').each(function(){
+        $(this).on('slideStop', function(){
+            var id =  $(this).attr('id');
+            $('div.filter#' + id).addClass('active');
+            app.searchKitas();
+        });
+    });
+    
     
     $('div.filter').each(function(){
-      $(this).on('click', function(){
-        $(this).toggleClass('active');
-      });
+        $(this).on('click', function(){
+            $(this).toggleClass('active');
+            if ( $(this).hasClass('active') ){
+              app.searchKitas();
+            }
+        });
     });
+
 });
 
