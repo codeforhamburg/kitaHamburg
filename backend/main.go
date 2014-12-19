@@ -31,7 +31,9 @@ func RespErr(rw http.ResponseWriter, err error, status int) {
 func ExitErr(msg string, err error, status int) {
 	if err != nil {
 		log.Println(msg, err, "ret:", status)
-		os.Exit(status)
+		if !local {
+			os.Exit(status)
+		}
 	}
 }
 
