@@ -62,8 +62,21 @@ html,body,.fluid-container
 }
 
 .filter {
-    border: 1px solid black;
-	background: white;
-    margin: 1% 0;
+    border: 1px solid #F9F9F9;
+	background: #F3F3F3;
+    margin: 1em 0;
     padding: 1%;
+}
+
+.filter.active{
+	border: 2px solid orange;
+	background: white;
+}
+
+input.filterSelect{
+	margin: 1em;
+}
+
+input.slider{
+	margin: 2em;
 }

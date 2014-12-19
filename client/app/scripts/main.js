@@ -140,5 +140,11 @@ $(document).ready(function() {
     $('input.filterSelect').click(function(){
         app.searchKitas();
     });
+    
+    $('div.filter').each(function(){
+      $(this).on('click', function(){
+        $(this).toggleClass('active');
+      });
+    });
 });
 
