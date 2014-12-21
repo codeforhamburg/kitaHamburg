@@ -30,7 +30,7 @@ app.generatePopup = function (kita){
 
     tmpl += '</div>';
     return tmpl;
-}
+};
 
 // generates and styles a marker to be used to represent a feature
 // see: http://leafletjs.com/reference.html#marker
@@ -44,31 +44,39 @@ app.generateMarker = function (feature, latlng){
         riseOnHover: true,
         riseOffset: 250
     });
-}
+};
 
 app.getSliderStates = function (){
     var currentOptions = {};
     $('input.slider').each(function(){
         var key = $(this).attr('id');
-        console.debug('Key:', key);
-        
-        var filter = $('div.filter#' + key);
-        if ( ! filter.hasClass('active')){
+        if ( ! $('div.filter#' + key).hasClass('active')){
             return;
         }
-        console.debug("filter:", filter);
         
         var currentValues = $(this).slider('getAttribute', 'value');
-        console.debug("sliderValues:", currentValues);
         
         currentOptions[key] = {
             Min: Math.min(currentValues[0], currentValues[1]),
             Max: Math.max(currentValues[0], currentValues[1]),
         };
     });
-    console.debug("currentOptions:", currentOptions);
     return currentOptions;
-}
+};
+
+app.getUnTimedServices = function(query){
+    var serviceNames = ['vorschulklasse', 'anschlBertrGTSonder', 'paedMittagsTisch'];
+    serviceNames.forEach(function(serviceName){
+        if ( ! $('div.filter#' + serviceName).hasClass('active') ){
+            return;
+        }
+        query[serviceName] = {
+            Min: -1,
+            Max: -2,
+        };
+    });
+    return query;
+};
 
 
 app.updateMap = function (data){
@@ -86,10 +94,12 @@ app.updateMap = function (data){
             layer.bindPopup(app.generatePopup(feature.properties));
         }
     }).addTo(app.map);
-}
+};
 
 app.searchKitas = function(){
     var query = app.getSliderStates();
+    query = app.getUnTimedServices(query);
+    console.debug('query:', query);
     $.ajax({
         type: 'POST',
         url: '/cgi-bin/kitas/',
@@ -99,7 +109,7 @@ app.searchKitas = function(){
         success: app.updateMap,
         error: function (err){ console.log('error', err);},
     });
-}
+};
 
 
 $(document).ready(function() {
@@ -147,7 +157,7 @@ $(document).ready(function() {
         $(this).on('click', function(){
             $(this).toggleClass('active');
             if ( $(this).hasClass('active') ){
-              app.searchKitas();
+                app.searchKitas();
             }
         });
     });

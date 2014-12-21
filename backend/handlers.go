@@ -37,7 +37,7 @@ func (h *DBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	var data services
 	err := dec.Decode(&data)
-	log.Println(data)
+	log.Println("body:", data)
 	RespErr(w, err, 500)
 	ExitErr("decoding request body", err, 500)
 
@@ -61,11 +61,16 @@ func (h *DBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func buildQuery(data services) bson.M {
 	parts := make([]bson.M, 0, len(data))
 	for service, times := range data {
-		parts = append(parts, bson.M{"$and": []bson.M{
+		parts = append(parts,
 			bson.M{"properties.services." + service: bson.M{"$exists": true}},
-			bson.M{"properties.services." + service + ".Min": bson.M{"$lte": times.Min}},
-			bson.M{"properties.services." + service + ".Max": bson.M{"$gte": times.Max}},
-		}})
+		)
+
+		if times.Min > 0 && times.Max > 0 {
+			parts = append(parts,
+				bson.M{"properties.services." + service + ".Min": bson.M{"$lte": times.Min}},
+				bson.M{"properties.services." + service + ".Max": bson.M{"$gte": times.Max}},
+			)
+		}
 	}
 	if len(parts) == 1 {
 		return parts[0]
