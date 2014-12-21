@@ -1,9 +1,26 @@
-/* global L, generatePopup */
+/* global L */
 'use strict';
 
 var app = {
     map: null,
     currentGEOJSONLayer: undefined,
+};
+
+app.StadtTeilStyle = {
+    color: '#000000',
+    fillOpacity: 0,
+    opacity: 0.8,
+    weight: 1,
+    clickable: true,
+};
+
+app.StadtTeilStyleActive = {
+    color: '#FFA500',
+    opacity: 0.5,
+    weight: 4,
+    fill: true,
+    fillOpacity: 0.2,
+    clickable: true,
 };
 
 
@@ -78,6 +95,18 @@ app.getUnTimedServices = function(query){
     return query;
 };
 
+app.StadtteilClick = function(e){
+    var layer = e.target;
+    
+    if (!layer.kitaHHActive){
+        layer.setStyle(app.StadtTeilStyleActive);
+        layer.kitaHHActive = true;
+    } else {
+        layer.setStyle(app.StadtTeilStyle);
+        layer.kitaHHActive = false;
+    }
+};
+
 
 app.updateMap = function (data){
     var kitas = data || [];
@@ -125,23 +154,19 @@ $(document).ready(function() {
     
     // Overlay: Stadtteile Hamburg
     $.getJSON('stadtteile_hh.geojson', function(data) {
-        L.geoJson(data, {
+        app.Stadtteile = L.geoJson(data, {
             style: function() {
-                return {
-                    color: '#000000',
-                    fillOpacity: 0,
-                    opacity: 0.5,
-                    weight: 1
-                };
+                return app.StadtTeilStyle;
             },
             onEachFeature: function(feature, layer) {
                 layer.bindLabel(feature.properties.name);
+                layer.on('click', app.StadtteilClick);
             }
         }).addTo(app.map);
     });
     
     $('input.slider').each(function(){
-        $(this).slider({tooltip_split: true});
+        $(this).slider({tooltip_split: true});  // jshint ignore:line
     });
     
     $('input.slider').each(function(){
