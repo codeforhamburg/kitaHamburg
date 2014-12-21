@@ -134,9 +134,9 @@ $(document).ready(function() {
                     weight: 1
                 };
             },
-           /* onEachFeature: function(feature, layer) {
+            onEachFeature: function(feature, layer) {
                 layer.bindLabel(feature.properties.name);
-            }*/
+            }
         }).addTo(app.map);
     });
     
