@@ -7,7 +7,6 @@ import (
 
 	//gcw "github.com/gocraft/web"
 	mgo "gopkg.in/mgo.v2"
-	bson "gopkg.in/mgo.v2/bson"
 )
 
 type DBHandler struct {
@@ -35,14 +34,14 @@ func (h *DBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	dec := json.NewDecoder(r.Body)
 	defer r.Body.Close()
 
-	var data services
+	var data ReqData
 	err := dec.Decode(&data)
 	log.Println("body:", data)
 	RespErr(w, err, 500)
 	ExitErr("decoding request body", err, 500)
 
 	var found []interface{}
-	q := buildQuery(data)
+	q := data.buildDBQuery()
 	log.Println("q:", q)
 	err = h.Kitas.Find(q).All(&found)
 	RespErr(w, err, 500)
@@ -56,24 +55,4 @@ func (h *DBHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	enc := json.NewEncoder(w)
 	err = enc.Encode(found)
 	ExitErr("Marshaling body", err, 500)
-}
-
-func buildQuery(data services) bson.M {
-	parts := make([]bson.M, 0, len(data))
-	for service, times := range data {
-		parts = append(parts,
-			bson.M{"properties.services." + service: bson.M{"$exists": true}},
-		)
-
-		if times.Min > 0 && times.Max > 0 {
-			parts = append(parts,
-				bson.M{"properties.services." + service + ".Min": bson.M{"$lte": times.Min}},
-				bson.M{"properties.services." + service + ".Max": bson.M{"$gte": times.Max}},
-			)
-		}
-	}
-	if len(parts) == 1 {
-		return parts[0]
-	}
-	return bson.M{"$and": parts}
 }

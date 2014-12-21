@@ -3,7 +3,11 @@
 
 var app = {
     map: null,
-    currentGEOJSONLayer: undefined,
+    kitaMarkers: undefined,
+    query: {
+        services: {},
+        stadtteile: {},
+    },
 };
 
 app.StadtTeilStyle = {
@@ -64,7 +68,6 @@ app.generateMarker = function (feature, latlng){
 };
 
 app.getSliderStates = function (){
-    var currentOptions = {};
     $('input.slider').each(function(){
         var key = $(this).attr('id');
         if ( ! $('div.filter#' + key).hasClass('active')){
@@ -73,26 +76,26 @@ app.getSliderStates = function (){
         
         var currentValues = $(this).slider('getAttribute', 'value');
         
-        currentOptions[key] = {
+        app.query.services[key] = {
             Min: Math.min(currentValues[0], currentValues[1]),
             Max: Math.max(currentValues[0], currentValues[1]),
         };
     });
-    return currentOptions;
+    return app;
 };
 
-app.getUnTimedServices = function(query){
+app.getUnTimedServices = function(){
     var serviceNames = ['vorschulklasse', 'anschlBertrGTSonder', 'paedMittagsTisch'];
     serviceNames.forEach(function(serviceName){
         if ( ! $('div.filter#' + serviceName).hasClass('active') ){
             return;
         }
-        query[serviceName] = {
+        app.query[serviceName] = {
             Min: -1,
             Max: -2,
         };
     });
-    return query;
+    return app;
 };
 
 app.StadtteilClick = function(e){
@@ -101,24 +104,25 @@ app.StadtteilClick = function(e){
     if (!layer.kitaHHActive){
         layer.setStyle(app.StadtTeilStyleActive);
         layer.kitaHHActive = true;
+        app.query.stadtteile[layer.feature.properties.name] = true;
     } else {
         layer.setStyle(app.StadtTeilStyle);
         layer.kitaHHActive = false;
+        delete app.query.stadtteile[layer.feature.properties.name];
     }
 };
 
-
 app.updateMap = function (data){
     var kitas = data || [];
-    if (app.currentGEOJSONLayer !== undefined){
-        app.map.removeLayer(app.currentGEOJSONLayer);
+    if (app.kitaMarkers !== undefined){
+        app.map.removeLayer(app.kitaMarkers);
     }
     
     console.log('Found:', kitas.length, kitas[0]);
     
     var GeoJSON = {type: 'FeatureCollection', features: kitas};
     
-    app.currentGEOJSONLayer = L.geoJson(GeoJSON, {
+    app.kitaMarkers = L.geoJson(GeoJSON, {
         onEachFeature: function (feature, layer) {
             layer.bindPopup(app.generatePopup(feature.properties));
         }
@@ -126,13 +130,14 @@ app.updateMap = function (data){
 };
 
 app.searchKitas = function(){
-    var query = app.getSliderStates();
-    query = app.getUnTimedServices(query);
-    console.debug('query:', query);
+    app.getSliderStates();
+    app.getUnTimedServices();
+    
+    console.debug('query:', app.query);
     $.ajax({
         type: 'POST',
         url: '/cgi-bin/kitas/',
-        data: JSON.stringify(query),
+        data: JSON.stringify(app.query),
         contentType: 'application/json',
         dataType: 'json',
         success: app.updateMap,
