@@ -10,6 +10,18 @@ var app = {
     },
 };
 
+app.HelpPopUp = L.popup({
+  keepInView: true, closeButton: true,
+}).setLatLng([53.56, 10.02])
+  .setContent('<div>'+
+'<h2>Willkommen beim Hamburger Kitafinder!</h2>'+
+'<p>Hier kannst du ganz einfach die passende Kita für dich und deine Lütten finden.</p>'+
+'<ol>'+
+  '<li>Klicke dazu einfach <u>auf der Karte</u> <b>einen oder mehrere Stadtteile</b></li>'+
+  '<li>und wähle <u>rechts</u> <b>eines oder mehrere Betreuungsangebote</b></li>'+
+'</ol>'+
+'</div>');
+
 app.StadtTeilStyle = {
     color: '#000000',
     fillOpacity: 0,
@@ -190,6 +202,7 @@ $(document).ready(function() {
             }
         });
     });
-
+    
+    app.HelpPopUp.openOn(app.map);
 });
 
