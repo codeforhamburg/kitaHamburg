@@ -32,14 +32,14 @@
                 <div id="map" class="col-md-12"></div>
                 <div id="filters" class="col-md-4 col-md-offset-8">
 					<ul class="nav nav-tabs" role="tablist">
-					  <li class="active"><a href="#klein" role="tab" data-toggle="tab">0 - 3 Jahre</a></li>
-					  <li><a href="#mittel" role="tab" data-toggle="tab">3 - 6 Jahre</a></li>
+					  <li><a href="#klein" role="tab" data-toggle="tab">0 - 3 Jahre</a></li>
+					  <li class="active"><a href="#mittel" role="tab" data-toggle="tab">3 - 6 Jahre</a></li>
 					  <li><a href="#gross" role="tab" data-toggle="tab">6 - 14 Jahre</a></li>
 					</ul>
 					
 					<div class="tab-content">
-						<div class="tab-pane fade in active" id="klein">
-							<div class="filter" id="krippe">
+						<div class="tab-pane fade" id="klein">
+							<div class="row filter" id="krippe">
 								<h2>Krippe</h2>
 								<input type="text" name="krippe" class="slider" id="krippe"
 									data-slider-id='krippeSlider'
@@ -51,11 +51,12 @@
 									<span class="min"></span>
 									<span class="max"></span>
 								</span>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="krippe">auswählen</button>
 							</div>
 						</div>
 						
-						<div class="tab-pane fade" id="mittel">
-							<div class="filter" id="elementar">
+						<div class="tab-pane fade in active" id="mittel">
+							<div class="row filter" id="elementar">
 								<h2>Elementar</h2>
 								<input type="text" name="elementar" class="slider" id="elementar"
 									data-slider-id='elementarSlider'
@@ -63,9 +64,10 @@
 									data-slider-max="12"
 									data-slider-step="1"
 									data-slider-value="[5,8]"/>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="elementar">auswählen</button>
 							</div>
 							
-							<div class="filter" id="eingliederungshilfe">
+							<div class="row filter" id="eingliederungshilfe">
 								<h2 for="eingliederungshilfe">Eingliederungshilfe</h2>
 								<input type="text" name="eingliederungshilfe" class="slider" id="eingliederungshilfe"
 									data-slider-id='eingliederungshilfeSlider'
@@ -73,16 +75,18 @@
 									data-slider-max="12"
 									data-slider-step="1"
 									data-slider-value="[5,8]"/>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="eingliederungshilfe">auswählen</button>
 							</div>
 							
-							<div class="filter" id="vorschulklasse">
+							<div class="row filter" id="vorschulklasse">
 								<h2>Vorschulklasse</h2>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="vorschulklasse">auswählen</button>
 							</div>
 						</div>
 						
 
 						<div class="tab-pane fade" id="gross">
-							<div class="filter" id="hort">
+							<div class="row filter" id="hort">
 								<h2>Hort</h2>
 								<input type="text" name="hort" class="slider" id="hort"
 									data-slider-id='hortSlider'
@@ -90,9 +94,10 @@
 									data-slider-max="12"
 									data-slider-step="1"
 									data-slider-value="[2,7]"/>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="hort">auswählen</button>
 							</div>
 							
-							<div class="filter" id="anschlBertrGTS">
+							<div class="row filter" id="anschlBertrGTS">
 								<h2>Anschlussbetreuung Ganztagsschule</h2>
 								<input type="text" name="anschlBertrGTS" class="slider" id="anschlBertrGTS"
 									data-slider-id='anschlBertrGTSlider'
@@ -100,14 +105,17 @@
 									data-slider-max="12"
 									data-slider-step="1"
 									data-slider-value="[3,3]"/>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="anschlBertrGTS">auswählen</button>
 							</div>
 							
-							<div class="filter" id="anschlBertrGTSonder">
+							<div class="row filter" id="anschlBertrGTSonder">
 								<h2>Anschlussbetreuung Ganztagsschule Sonderbedarfe</h2>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="anschlBertrGTSonder">auswählen</button>
 							</div>
 							
-							<div class="filter" id="paedMittagsTisch">
+							<div class="row filter" id="paedMittagsTisch">
 								<h2>Pädagogischer Mittagstisch</h2>
+								<button class="serviceSelector btn btn-large btn-default pull-right" id="paedMittagsTisch">auswählen</button>
 							</div>
 						</div>
 					</div>

@@ -110,6 +110,7 @@ app.StadtteilClick = function(e){
         layer.kitaHHActive = false;
         delete app.query.stadtteile[layer.feature.properties.name];
     }
+    app.searchKitas();
 };
 
 app.updateMap = function (data){
@@ -170,24 +171,22 @@ $(document).ready(function() {
         }).addTo(app.map);
     });
     
-    $('input.slider').each(function(){
-        $(this).slider({tooltip_split: true});  // jshint ignore:line
-    });
-    
-    $('input.slider').each(function(){
+    $('input.slider').slider({tooltip_split: true}).each(function(){
         $(this).on('slideStop', function(){
-            var id =  $(this).attr('id');
-            $('div.filter#' + id).addClass('active');
             app.searchKitas();
         });
     });
     
     
-    $('div.filter').each(function(){
+    $('button.serviceSelector').each(function(){
         $(this).on('click', function(){
-            $(this).toggleClass('active');
-            if ( $(this).hasClass('active') ){
+            $('div.filter#' + $(this).attr('id')).toggleClass('active');
+            $(this).toggleClass('btn-default btn-primary');
+            if ($(this).text() === 'auswählen'){
+                $(this).html('ausgewählt');
                 app.searchKitas();
+            } else {
+                $(this).html('auswählen');
             }
         });
     });
