@@ -24,19 +24,22 @@ app.HelpPopUp = L.popup({
 '</div>');
 
 app.StadtTeilStyle = {
-    color: '#000000',
-    fillOpacity: 0,
-    opacity: 0.8,
-    weight: 1,
+    color: '#FFFFFF',
+    opacity: 0.5,
+    weight: 2,
+    fillOpacity: 0.4,
+    fillColor: '#EE0000',
+    
     clickable: true,
 };
 
 app.StadtTeilStyleActive = {
-    color: '#FFA500',
-    opacity: 0.5,
+    color: '#FFFFFF',
+    opacity: 0.8,
     weight: 4,
     fill: true,
-    fillOpacity: 0.2,
+    fillColor: '#EE0000',
+    fillOpacity: 0.7,
     clickable: true,
 };
 
