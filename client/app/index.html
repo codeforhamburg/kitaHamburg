@@ -41,16 +41,13 @@
 						<div class="tab-pane fade" id="klein">
 							<div class="row filter" id="krippe">
 								<h2>Krippe</h2>
+								<label for="krippe">Stunden</label>
 								<input type="text" name="krippe" class="slider" id="krippe"
 									data-slider-id='krippeSlider'
 									data-slider-min="4"
 									data-slider-max="12"
 									data-slider-step="1"
 									data-slider-value="[5,8]"/>
-								<span class="range">
-									<span class="min"></span>
-									<span class="max"></span>
-								</span>
 								<button class="serviceSelector btn btn-large btn-default pull-right" id="krippe">auswählen</button>
 							</div>
 						</div>
@@ -58,6 +55,7 @@
 						<div class="tab-pane fade in active" id="mittel">
 							<div class="row filter" id="elementar">
 								<h2>Elementar</h2>
+								<label for="elementar">Stunden</label>
 								<input type="text" name="elementar" class="slider" id="elementar"
 									data-slider-id='elementarSlider'
 									data-slider-min="4"
@@ -69,6 +67,7 @@
 							
 							<div class="row filter" id="eingliederungshilfe">
 								<h2 for="eingliederungshilfe">Eingliederungshilfe</h2>
+								<label for="eingliederungshilfe">Stunden</label>
 								<input type="text" name="eingliederungshilfe" class="slider" id="eingliederungshilfe"
 									data-slider-id='eingliederungshilfeSlider'
 									data-slider-min="1"
@@ -80,6 +79,7 @@
 							
 							<div class="row filter" id="vorschulklasse">
 								<h2>Vorschulklasse</h2>
+								<span>Betreuungsangebot ohne zeitliche Befristung</span>
 								<button class="serviceSelector btn btn-large btn-default pull-right" id="vorschulklasse">auswählen</button>
 							</div>
 						</div>
@@ -88,6 +88,7 @@
 						<div class="tab-pane fade" id="gross">
 							<div class="row filter" id="hort">
 								<h2>Hort</h2>
+								<label for="hort">Stunden</label>
 								<input type="text" name="hort" class="slider" id="hort"
 									data-slider-id='hortSlider'
 									data-slider-min="1"
@@ -99,6 +100,7 @@
 							
 							<div class="row filter" id="anschlBertrGTS">
 								<h2>Anschlussbetreuung Ganztagsschule</h2>
+								<label for="anschlBertrGTS">Stunden</label>
 								<input type="text" name="anschlBertrGTS" class="slider" id="anschlBertrGTS"
 									data-slider-id='anschlBertrGTSlider'
 									data-slider-min="1"
@@ -110,11 +112,13 @@
 							
 							<div class="row filter" id="anschlBertrGTSonder">
 								<h2>Anschlussbetreuung Ganztagsschule Sonderbedarfe</h2>
+								<span>Betreuungsangebot ohne zeitliche Befristung</span>
 								<button class="serviceSelector btn btn-large btn-default pull-right" id="anschlBertrGTSonder">auswählen</button>
 							</div>
 							
 							<div class="row filter" id="paedMittagsTisch">
 								<h2>Pädagogischer Mittagstisch</h2>
+								<span>Betreuungsangebot ohne zeitliche Befristung</span>
 								<button class="serviceSelector btn btn-large btn-default pull-right" id="paedMittagsTisch">auswählen</button>
 							</div>
 						</div>
