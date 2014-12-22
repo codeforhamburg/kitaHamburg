@@ -146,6 +146,18 @@ app.StadtteilClick = function(e){
     app.searchKitas();
 };
 
+app.AngebotFilter = function(name){
+    $('div.filter#' + name).toggleClass('active');
+    
+    var btn = $('button.serviceSelector#' + name);
+    btn.toggleClass('btn-default btn-primary');
+    if (btn.html() === 'auswählen' ) {
+        btn.html('abwählen');
+    } else {
+        btn.html('auswählen');
+    }
+};
+
 app.updateMap = function (data){
     var kitas = data || [];
     if (app.kitaMarkers !== undefined){
@@ -204,8 +216,13 @@ $(document).ready(function() {
         }).addTo(app.map);
     });
     
-    $('input.slider').slider({tooltip_split: true}).each(function(){ //jshint: ignore-line
+    $('input.slider')
+      .slider({tooltip_split: true}) //jshint ignore:line
+      .each(function(){
         $(this).on('slideStop', function(){
+            if (! $('div.filter#' + $(this).attr('id')).hasClass('active')){
+                app.AngebotFilter($(this).attr('id'));
+            }
             app.searchKitas();
         });
     });
@@ -213,14 +230,12 @@ $(document).ready(function() {
     
     $('button.serviceSelector').each(function(){
         $(this).on('click', function(){
-            $('div.filter#' + $(this).attr('id')).toggleClass('active');
-            $(this).toggleClass('btn-default btn-primary');
-            if ($(this).text() === 'auswählen'){
-                $(this).html('ausgewählt');
-                app.searchKitas();
-            } else {
-                $(this).html('auswählen');
+            var serviceID = $(this).attr('id');
+            if ($('div.filter#' + serviceID).hasClass('active')){
+                delete app.query.services[serviceID];
             }
+            app.AngebotFilter($(this).attr('id'));
+            app.searchKitas();
         });
     });
     
