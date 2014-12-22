@@ -11,7 +11,8 @@ var app = {
 };
 
 app.HelpPopUp = L.popup({
-  keepInView: true, closeButton: true,
+    keepInView: true,
+    closeButton: true,
 }).setLatLng([53.56, 10.02])
   .setContent('<div>'+
 '<h2>Willkommen beim Hamburger Kitafinder!</h2>'+
@@ -45,22 +46,42 @@ app.StadtTeilStyleActive = {
 // TODO: better styling, add css classes and so on...
 app.generatePopup = function (kita){
     var tmpl = '<div class="container">';
-
+    
+    tmpl +=  '<h5>' + kita.name + '</h5>';
+    
     if (kita.website !== undefined){
-        tmpl += '<a href="' + kita.website + '" target="blank">' + kita.name + '</a></br>';
-    } else{
-        tmpl +=  '<b>' + kita.name + '</b></br>';
+        tmpl += '<a href="' + kita.website + '" target="blank">' + kita.website + '</a></br>';
     }
-
+    
     tmpl += '<b>Träger</b>: ' + kita.operator + '</br>';
 
-    if (kita.email !== undefined && kita.contact !== undefined){
-        tmpl += '<b>Ansprechpartner</b>: <a href="mailto:' + kita.email + '">' + kita.contact + '</a>';
+    if (kita.contact !== undefined && kita.contact !== ''){
+        tmpl += '<b>Ansprechpartner</b>: ' + kita.contact + '</br>';
     }
-    if (kita.phone !== undefined) {
-        tmpl += ' (' + kita.phone + ')';
+    if (kita.email !== undefined && kita.email !== ''){
+        tmpl += '<b>Kontakt</b>:';
+        tmpl += '<a href="mailto:'+kita.email+'" >'+kita.email+'</a></br>';
     }
-
+    
+    if (kita.phone !== undefined && kita.phone !== '') {
+        tmpl += '<b>Tel</b>:' + kita.phone;
+    }
+    if (kita.fax !== undefined && kita.fax !== ''){
+        tmpl += ' <b>Fax</b>: ' + kita.fax;
+    }
+    tmpl += '</br>';
+    
+    tmpl += '<b>Adresse</b>: ' + kita.street;
+    if (kita.housenumber !== undefined && kita.housenumber !== ''){
+        tmpl += ' ' + kita.housenumber;
+    }
+    if (kita.postcode !== undefined && kita.postcode !== ''){
+        tmpl += ', ' + kita.postcode + ' Hamburg';
+    }
+    tmpl += '</br>';
+    
+    
+    
     tmpl += '</div>';
     return tmpl;
 };
@@ -183,7 +204,7 @@ $(document).ready(function() {
         }).addTo(app.map);
     });
     
-    $('input.slider').slider({tooltip_split: true}).each(function(){
+    $('input.slider').slider({tooltip_split: true}).each(function(){ //jshint: ignore-line
         $(this).on('slideStop', function(){
             app.searchKitas();
         });
