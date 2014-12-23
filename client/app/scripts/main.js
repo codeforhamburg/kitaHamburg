@@ -185,7 +185,7 @@ app.searchKitas = function(){
     console.debug('query:', app.query);
     $.ajax({
         type: 'POST',
-        url: '/cgi-bin/kitas/',
+        url: '/api/kitas/',
         data: JSON.stringify(app.query),
         contentType: 'application/json',
         dataType: 'json',
