@@ -38,11 +38,7 @@ Die Kitafinder app für Hamburg.
 - clean/consolidate Fieldnames (requires syncronous code changes)
 
 ### Backend:
-- Configfile for settings
-- better logging
-- general cleanup
 - startup script for deploy
-- drop cgi stuff
 
 ### Frontend:
 - include leaflet/dist/images into build (imagemin!)
