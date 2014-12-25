@@ -1,6 +1,8 @@
 /* global L */
 'use strict';
 
+console.log("L.Icon.Default.imagePath:",  L.Icon.Default.imagePath);
+
 var app = {
     map: null,
     kitaMarkers: undefined,

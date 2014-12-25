@@ -334,8 +334,16 @@ module.exports = function (grunt) {
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*',
                         '{,*/}*.json',
-                        '{,*/}*.geojson'
+                        '{,*/}*.geojson',
                     ]
+                },{
+                    // This prevents the "Couldn't autodetect L.Icon.Default.imagePath" error
+                    // by copying leaflet's marker images over to the dist folder
+                    expand: true,
+                    dot: true,
+                    cwd: 'bower_components/leaflet/dist/images',
+                    src: '*.png',
+                    dest: '<%= config.dist %>/leaflet/dist/images',
                 }]
             },
             styles: {
