@@ -19,11 +19,11 @@ Die Kitafinder app für Hamburg.
 - install go (golang.org)
 - cmd-line: cd kitaHamburg/backend
 - cmd-line: go install
-- cmd-line: backend -l
+- cmd-line: backend -f ../example.conf
 
 ## Install - DB
 - install MongoDB
-- mongo-import -d kita -c kitas -t json --jsonArray < client/app/kitas.geojson
+- mongoimport -d kita -c kitas -t json --jsonArray < data/kitaArray.json
 
 ##dev-server starten
 - benötigt vorher install
