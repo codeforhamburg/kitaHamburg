@@ -1,5 +1,7 @@
 #kitafinder
 Die Kitafinder app für Hamburg.
+Live: [http://hamburg.codefor.de/kitas]
+
 
 ##Features
 - kitas nach Betreuungsangebot filtern (done)
@@ -43,4 +45,6 @@ Die Kitafinder app für Hamburg.
 ### Frontend:
 - include leaflet/dist/images into build (imagemin!)
 - search progress indicator
-- 
+
+## LICENSE
+see LICENSE file
