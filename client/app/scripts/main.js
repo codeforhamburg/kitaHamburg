@@ -85,8 +85,6 @@ app.generatePopup = function (kita){
     }
     tmpl += '</br>';
     
-    
-    
     tmpl += '</div>';
     return tmpl;
 };

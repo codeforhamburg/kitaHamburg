@@ -87,3 +87,7 @@ input.filterSelect{
 input.slider{
 	margin: 2em;
 }
+
+.leaflet-container a.leaflet-popup-close-button{
+	margin: 5px;
+}
