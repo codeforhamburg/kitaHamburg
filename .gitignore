@@ -1,7 +1,11 @@
+# frontend
 node_modules
 dist
 .tmp
 .sass-cache
 bower_components
 test/bower_components
+
+# backend
+backend/backend
 *.log
