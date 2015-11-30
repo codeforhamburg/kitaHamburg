@@ -1,0 +1,5 @@
+- Einträge in Liste selectieren, downloaden (window.print()?)
+- Eingangsseite 
+- Bootstrap raus
+- Awesome markers rein
+- Daten von Stadt updaten
