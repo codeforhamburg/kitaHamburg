@@ -1,7 +1,7 @@
 /* global L */
 'use strict';
 
-console.log("L.Icon.Default.imagePath:",  L.Icon.Default.imagePath);
+console.log('L.Icon.Default.imagePath:',  L.Icon.Default.imagePath);
 
 var app = {
     map: null,
@@ -190,7 +190,9 @@ app.searchKitas = function(){
         contentType: 'application/json',
         dataType: 'json',
         success: app.updateMap,
-        error: function (err){ console.log('error', err);},
+        error: function (err){
+            console.log('error', err);
+        },
     });
 };
 

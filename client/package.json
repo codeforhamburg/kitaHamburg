@@ -34,7 +34,7 @@
     "grunt-jsonlint": "^1.0.4",
     "jsonlint-lines": "^1.6.0",
     "grunt-json-minify": "^0.4.0",
-    "grunt-connect-proxy": "^0.1.11"
+    "grunt-connect-proxy": "^0.2"
   },
   "engines": {
     "node": ">=0.10.0"
